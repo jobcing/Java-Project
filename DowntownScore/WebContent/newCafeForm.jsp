@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Notice Write</title>
+	<title>평점 등록</title>
 	<meta name="author" content="Luka Cvrk (www.solucija.com)" />
 	<meta name="Robots" content="index,follow" />
 	<meta name="description" content="Description" />
