@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+<%-- 공지사항 글 목록을 보여주는 페이지 --%>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>공지사항</title>
@@ -13,14 +16,16 @@
 <link href="css/content.css" rel="stylesheet" type="text/css"
 	media="screen" />
 </head>
+
 <body>
 	<div id="content">
-		<%
-			request.setAttribute("current", "notice");
-		%>
+		<%-- 현재 카페 관련 탭에 있다는 걸 알려주기 위해 request 변수 설정 --%>
+		<% request.setAttribute("current", "notice"); %>
+		<%-- 상단 메뉴바 불러오기 --%>
 		<%@ include file="./topMenu.jsp"%>
 
 		<div id="pitch">
+			<%-- 가로크기, 셀과 데이터간의 간격, 셀과 셀의 간격, 테두리 굵기, 정렬위치 지정 테이블 생성 --%>
 			<table width="100%" cellpadding="5" cellspacing="2"
 				border="1" align="center">
 				<colgroup>
@@ -29,20 +34,24 @@
 					<col width="100" />
 					<col width="50" />
 				</colgroup>
+				
 				<thead>
 					<tr align="center" height="50">
-						<td>번호</td>
-						<td>제목</td>
-						<td>작성자</td>
-						<td>조회수</td>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>조회수</th>
 					</tr>
 				</thead>
+				
 				<tbody>
 					<c:if test="${ noticePage.hasNoNotice() }">
 						<tr>
 							<td colspan="4">게시글이 없습니다.</td>
 						</tr>
 					</c:if>
+					
+					<%-- ArrayList<Notice>를 받아와서 notice변수로 설정 --%>
 					<c:forEach var="notice" items="${ noticePage.content }">
 						<tr>
 							<td align=center>${ notice.number }</td>
@@ -50,32 +59,44 @@
 								href="readNotice.jb?no=${ notice.number }&pageNo=${ noticePage.currentPage }">
 									<c:out value="${ notice.title }" />
 							</a></td>
-							<td>${ notice.getWriter().getNickname() }</td>
-							<td>${ notice.readCount }</td>
+							<td align=center>${ notice.getWriter().getNickname() }</td>
+							<td align=center>${ notice.readCount }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
+				
+				<%-- 페이지 번호 표시 --%>
 				<tfoot>
 					<c:if test="${ noticePage.hasNotices() }">
 						<tr align=center height="50">
-							<td colspan="4"><c:if test="${ noticePage.startPage > 5 }">
+							<td colspan="4">
+								<c:if test="${ noticePage.startPage > 5 }">
 									<a href="listNotice.jb?pageNo=${ noticePage.startPage - 5 }">[이전]</a>
-								</c:if> <c:forEach var="pNo" begin="${ noticePage.startPage }"
+								</c:if>
+								
+								<c:forEach var="pNo" begin="${ noticePage.startPage }"
 									end="${ noticePage.endPage }">
 									<a href="listNotice.jb?pageNo=${ pNo }">[${ pNo }]</a>
-								</c:forEach> <c:if test="${ noticePage.endPage < noticePage.totalPage }">
+								</c:forEach> 
+								
+								<c:if test="${ noticePage.endPage < noticePage.totalPage }">
 									<a href="listNotice.jb?pageNo=${ noticePage.startPage + 5 }">[다음]</a>
 								</c:if></td>
 						</tr>
 					</c:if>
-					<tr height="50">
-						<td align="right" colspan="4"><a href="writeNotice.jb">[게시글
-								쓰기]</a></td>
+					
+					<%-- 게시글 등록 버튼 --%>
+					<tr height="30">
+						<td align="right" colspan="4">
+							<%-- 버튼을 클릭하면 해당 페이지로 이동 --%>
+							<input type="button" value="게시글 쓰기" onclick="location.href='writeNotice.jb'"/>
+						</td>
 					</tr>
 				</tfoot>
 			</table>
 		</div>
 
+		<%-- 화면 하단 탭 부분 --%>
 		<div class="line"></div>
 
 		<div id="lists">

@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+<%-- 카페 평점 리스트를 보여주는 페이지 --%>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>카페</title>
@@ -13,31 +16,44 @@
 <link href="css/content.css" rel="stylesheet" type="text/css"
 	media="screen" />
 </head>
+
 <body>
 	<div id="content">
-		<%
-			request.setAttribute("current", "cafe");
-		%>
+		<%-- 현재 카페 관련 탭에 있다는 걸 알려주기 위해 request 변수 설정 --%>
+		<% request.setAttribute("current", "cafe"); %>
+		<%-- 상단 메뉴바 불러오기 --%>
 		<%@ include file="./topMenu.jsp"%>
 
 		<div id="pitch">
-			<form action="./listCafe.jb" method="post">
-				주변역:
-				<select name="station">
+			<%-- 검색버튼을 누르면 get방식으로 인자 전달 --%>
+			<form action="./listCafe.jb" method="get">
+				<%-- font size 를 13pt 변경 --%>
+				<span style="font-size: 15pt"> 주변역 :  </span>
+				<select name="station" style="width:150px; height:50px; font-size: 13pt">
 					<option value="범계역" selected>범계역</option>
 				</select>
-				<br/>
-				상호명 : <input type="text" name="name"><br/>
 				
-				<input type="submit" value="검색">
+				<br/><br/>
+				<span style="font-size: 15pt"> 상호명 :  </span>
+				<input type="text" name="name" size="20" style="width:200px; height:50px; font-size: 13pt" />
+				<%-- 띄어쓰기 --%>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" value="검색" style="height:50px; width:100px; font-size: 13pt" />
 			</form>
 			<br/>
+			* 상호명을 입력하지않고 검색하면 전체 검색결과가 표시됨 *
+			<br/>
+			<br/>
+			<br/>
 			
+			<%-- 사용자가 입력한 상호명을 표시 --%>
 			<h2>'${ param.name }'이 포함된 검색결과입니다.<br/>
 			
+			<%-- 사용자가 입력한 상호명에 대한 평균 표시 --%>
 			<c:set var="avg" value="${ scoreAvg }" />
 			[ 평균 평점 : ${ avg } ]</h2>
 
+			<%-- 한줄평을 보여주는 테이블 생성 --%>
 			<table width="100%" cellpadding="5" cellspacing="2"
 				border="1" align="center">
 				<colgroup>
@@ -46,30 +62,39 @@
 					<col width="500" />
 					<col width="50" />
 				</colgroup>
+				
 				<thead>
-					<tr align="center" height="50">
-						<td>평점</td>
-						<td>상호명</td>
-						<td>한줄평</td>
-						<td>닉네임</td>
+					<tr height="50" align="center">
+						<th>평점</th>
+						<th>상호명</th>
+						<th>한줄평</th>
+						<th>닉네임</th>
 					</tr>
 				</thead>
+				
 				<tbody>
+					<%-- 해당 게시글이 없다면 표시 --%>
 					<c:if test="${ cafePage.hasNoNotice() }">
 						<tr>
 							<td colspan="4">게시글이 없습니다.</td>
 						</tr>
 					</c:if>
+					
+					<%-- ArrayList<Cafe>를 받아와서 cafe변수로 설정 --%>
 					<c:forEach var="cafe" items="${ cafePage.content }">
 						<tr>
-							<td align=center>${ cafe.score }</td>
+							<td align=center><span style="color:blue">${ cafe.score }</span></td>
 							<td align=center>${ cafe.name }</td>
 							<td>${ cafe.comment }</td>
-							<td>${ cafe.getNickname() }</td>
+							<td align=center>${ cafe.getNickname() }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
+				
+				<%-- 페이지 번호 표시 --%>
 				<tfoot>
+					<%-- 사용자가 검색한 '주변역'과 '상호명'을 전달받아서 station, name변수로 저장 --%>
+					<%-- 페이지 이동할 시 '주변역'과 '상호명'이 필요하기 때문 --%>
 					<c:set var="station" value="${ station }" />
 					<c:set var="name" value="${ name }" />
 					
@@ -92,13 +117,20 @@
 							</td>
 						</tr>
 					</c:if>
+					
+					<%-- 한줄평 등록 버튼 --%>
 					<tr height="50">
-						<td align="right" colspan="4"><a href="writeCafe.jb">[한줄평 등록]</a></td>
+						<td align="right" colspan="4">
+							<%-- 버튼을 클릭하면 해당 페이지로 이동 --%>
+							<input type="button" value="한줄평 등록" onclick="location.href='writeCafe.jb'"/>
+						</td>
 					</tr>
 				</tfoot>
+		
 			</table>
 		</div>
-
+		
+		<%-- 화면 하단 탭 부분 --%>
 		<div class="line"></div>
 
 		<div id="lists">

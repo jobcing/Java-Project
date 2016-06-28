@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+<%-- 회원들의 랭킹을 보여주는 페이지 --%>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>랭킹</title>
@@ -13,52 +16,64 @@
 <link href="css/content.css" rel="stylesheet" type="text/css"
 	media="screen" />
 </head>
+
 <body>
 	<div id="content">
-		<%
-			request.setAttribute("current", "ranking");
-		%>
+		<%-- 현재 순위 관련 탭에 있다는 걸 알려주기 위해 request 변수 설정 --%>
+		<% request.setAttribute("current", "ranking"); %>
+		<%-- 상단 메뉴바 불러오기 --%>
 		<%@ include file="./topMenu.jsp"%>
-
+		</br>
 		<div id="pitch">
+			<%-- ArrayList<Member>를 받아와서 rank변수로 설정 --%>
+			<%-- DB에서 현재 접속한 아이디와 일치하는 정보를 가져오기 위해 --%>
 			<c:forEach var="rank" items="${ rankingPage.content }"
 				varStatus="status">
+				
+				<%-- 접속한 아이디와 DB에 저장되어있는 닉네임과 같다면 랭크 표시 --%>
 				<c:if test="${ userNickname eq rank.getNickname() }">
 					<h2>'${ userNickname }' 님의 랭킹은 ${ status.count } 위 입니다.</h2>
 				</c:if>
+				
 			</c:forEach>
+			</br>
+			
 			<table width="100%" cellpadding="5" cellspacing="2" border="1"
 				align="center">
 				<colgroup>
 					<col width="50" />
 					<col width="500" />
 					<col width="100" />
-					<col width="50" />
 				</colgroup>
+				
 				<thead>
 					<tr align="center" height="50">
-						<td>순위</td>
-						<td>닉네임</td>
-						<td>포인트</td>
-						<td>조회수</td>
+						<th>순위</th>
+						<th>닉네임</th>
+						<th>포인트</th>
 					</tr>
 				</thead>
+			
 				<tbody>
+					<%-- 해당 게시글이 없다면 표시 --%>
 					<c:if test="${ rankingPage.hasNoNotice() }">
 						<tr>
 							<td colspan="4">게시글이 없습니다.</td>
 						</tr>
 					</c:if>
+					
+					<%-- ArrayList<Member>를 받아와서 rank변수로 설정 --%>
 					<c:forEach var="rank" items="${ rankingPage.content }"
 						varStatus="status">
 						<tr>
-							<td align=center>${ status.count }</td>
-							<td>${ rank.getNickname() }</td>
-							<td>${ rank.getCnt() }</td>
-							<td></td>
+							<td align=center><span style="color:blue">${ status.count }</span></td>
+							<td align=center>${ rank.getNickname() }</td>
+							<td align=center>${ rank.getCnt() }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
+				
+				<%-- 페이지 번호 표시 --%>
 				<tfoot>
 					<c:if test="${ rankingPage.hasNotices() }">
 						<tr align=center height="50">
@@ -73,9 +88,11 @@
 						</tr>
 					</c:if>
 				</tfoot>
+			
 			</table>
 		</div>
 
+		<%-- 화면 하단 탭 부분 --%>
 		<div class="line"></div>
 
 		<div id="lists">

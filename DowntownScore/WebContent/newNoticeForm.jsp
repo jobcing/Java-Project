@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+<%-- 공지글 등록하기 위한 FORM --%>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>공지글 등록</title>
@@ -10,43 +13,41 @@
 	<meta name="Robots" content="index,follow" />
 	<meta name="description" content="Description" />
 	<meta name="keywords" content="key, words" />
-	<link href="css/main.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="css/content.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
+
 <body>
 	<div id="content">
+		<%-- topMenu.jsp에 현재 notice관련 페이지가 열려있다는걸 알려주기 위해 request변수 설정 --%>
 		<% request.setAttribute("current", "notice"); %>
+		<%-- topMenu.jsp 페이지를 불러온다. --%>
 		<%@ include file="./topMenu.jsp" %>
 	
 		<div id="pitch">
+			<%-- 사용자가 입력한 데이터를 writeNotice.jb에 post방식으로 전송 --%>
 			<form action="writeNotice.jb" method="post">
 			<p>
-				제목:<br/><input type="text" name="title" value="${ param.title }"/>
+				<span style="font-size: 13pt; font-weight:bold"> 제목: </span><br/>
+				<%-- 제목 입력 필드 사이즈와 테두리값 설정 --%>
+				<input type="text" name="title" size="65" value="${ param.title }"
+										 style="width:800px; border: 1px solid #708090; font-size: 13pt"/>
+				<%-- errors.title 이 존재하면 --%>
 				<c:if test="${ errors.title }">제목을 입력하세요.</c:if>
 			</p>
+			<br/><br/>
 			<p>
-				내용:<br/>
-				<textarea name="content" rows="5" cols="30">${ param.content }</textarea>
+				<%-- 내용 입력 필드 행과 열 사이즈와 테두리값 설정 --%>
+				<span style="font-size: 13pt; font-weight:bold"> 내용: </span><br/>
+				<textarea name="content" rows="20" cols="65"
+							 style="width:800px; border: 1px solid #708090; font-size: 13pt">${ param.content }</textarea>
 			</p>
-			<input type="submit" value="새 글 등록"/>
+			<br/>
+			<%-- 버튼 사이즈 설정 --%>
+			<input type="submit" style="width:840px; font-size: 15pt" value="새 글 등록"/>
 			</form>
 		</div>
 		
-		<div class="col">
-			<h2>한글</h2>
-			<p>Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at ipsum.</p>
-			<a class="more" href="#">read more</a>
-		</div>
-		<div class="col">
-			<h2>Phasellus diam sapien</h2>
-			<p>Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at ipsum.</p>
-			<a class="more" href="#">read more</a>
-		</div>
-		<div class="col last">
-			<h2> Quisque scelerisque purus</h2>
-			<p>Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at ipsum.</p>
-			<a class="more" href="#">read more</a>
-		</div>
-		
+		<%-- 화면 하단 탭 부분 --%>
 		<div class="line"></div>
 		
 		<div id="lists">

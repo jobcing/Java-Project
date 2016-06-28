@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+<%-- 가입 성공시 열리는 페이지 --%>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Downtown Score</title>
@@ -11,17 +14,21 @@
 	<meta name="keywords" content="key, words" />
 	<link href="css/content.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
+
 <body>
 	<div id="content">
-		<h1><a href="./grades_main.jb"><span>Station</span>Grade</a></h1>
-		
+		<%-- 현재 메인 관련 탭에 있다는 걸 알려주기 위해 request 변수 설정 --%>
 		<% request.setAttribute("current", "main"); %>
+		<%-- 상단 메뉴바 불러오기 --%>
 		<%@ include file="./topMenu.jsp" %>
-	
-		<div id="pitch">
-			<h2>가입에 성공하였습니다.</h2>
-		</div>
+		<br/><br/><br/>
 		
+		<div id="pitch">
+			<span style="font-size: 30pt"> 가입에 성공하였습니다.</span>
+		</div>
+		<br/><br/><br/>
+		
+		<%-- 화면 하단 탭 부분 --%>
 		<div class="line"></div>
 		
 		<div id="lists">

@@ -49,6 +49,9 @@
   	<url-pattern>/writeNotice.jb</url-pattern>
   	<url-pattern>/modifyNotice.jb</url-pattern>
   	<url-pattern>/writeRestaurant.jb</url-pattern>
+  	<url-pattern>/writeCafe.jb</url-pattern>
+  	<url-pattern>/writeBar.jb</url-pattern>
+  	<url-pattern>/listRanking.jb</url-pattern>
   </filter-mapping>
   
 </web-app>

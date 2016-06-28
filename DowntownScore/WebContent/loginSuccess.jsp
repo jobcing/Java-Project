@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+<%-- 로그인 성공시 열리는 페이지 --%>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>로그인 성공</title>
@@ -12,24 +15,37 @@
 	<meta name="keywords" content="key, words" />
 	<link href="css/content.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
+
 <body>
 	<div id="content">
-	
+		<%-- 현재 로그인 관련 탭에 있다는 걸 알려주기 위해 request 변수 설정 --%>
 		<% request.setAttribute("current", "login"); %>
+		<%-- 상단 메뉴바 불러오기 --%>
 		<%@ include file="./topMenu.jsp" %>
 		
+		<br/><br/>
 		<div id="pitch">
+			<%-- Session 변수 authUser가 존재한다면 --%>
 			<c:if test="${! empty authUser }">
-				${ authUser.getNickname() }님, 안녕하세요.
-				<a href="logout.jb">[로그아웃]</a>
-				<a href="changePwd.jb">[암호변경]</a>
+				<%-- Session autoUser에 저장된 아이디 불러오기 --%>
+				<span style="font-size: 17pt"> ${ authUser.getNickname() }님, 안녕하세요. </span>
+				<br/><br/><br/>
+				
+				<span style="font-size: 10pt">
+				<a href="logout.jb">로그아웃</a>&nbsp;|&nbsp;
+				<a href="changePwd.jb">암호변경</a>
+				</span>
 			</c:if>
+			<%-- Session 변수 authUser가 존재하지 않는다면 --%>
 			<c:if test="${ empty authUser }">
-				<a href="join.jb">[회원가입]</a>
-				<a href="login.jb">[로그인]</a>
+				<span style="font-size: 10pt">
+				<a href="join.jb">회원가입</a>&nbsp;|&nbsp;
+				<a href="login.jb">로그인</a>
+				</span>
 			</c:if>
 		</div>
 		
+		<%-- 화면 하단 탭 부분 --%>
 		<div class="line"></div>
 		
 		<div id="lists">

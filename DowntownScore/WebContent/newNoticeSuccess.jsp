@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+<%-- 게시글을 성공적으로 등록하였을 경우 열리는 페이지 --%>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>등록 완료</title>
@@ -12,31 +15,21 @@
 	<meta name="keywords" content="key, words" />
 	<link href="css/main.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
+
 <body>
 	<div id="content">
+		<%-- 현재 공지사항 관련 탭에 있다는 걸 알려주기 위해 request 변수 설정 --%>
 		<% request.setAttribute("current", "notice"); %>
+		<%-- 상단 메뉴바 불러오기 --%>
 		<%@ include file="./topMenu.jsp" %>
+		<br/><br/><br/>
 	
 		<div id="pitch">
-			게시글을 등록했습니다.<br>
+			<span style="font-size: 30pt"> 게시글을 등록하였습니다. </span>
 		</div>
+		<br/><br/><br/>
 		
-		<div class="col">
-			<h2>한글</h2>
-			<p>Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at ipsum.</p>
-			<a class="more" href="#">read more</a>
-		</div>
-		<div class="col">
-			<h2>Phasellus diam sapien</h2>
-			<p>Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at ipsum.</p>
-			<a class="more" href="#">read more</a>
-		</div>
-		<div class="col last">
-			<h2> Quisque scelerisque purus</h2>
-			<p>Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at ipsum.</p>
-			<a class="more" href="#">read more</a>
-		</div>
-		
+		<%-- 화면 하단 탭 부분 --%>
 		<div class="line"></div>
 		
 		<div id="lists">

@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+<%-- 카페 한줄평 등록 FORM --%>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>평점 등록</title>
@@ -12,41 +15,58 @@
 	<meta name="keywords" content="key, words" />
 	<link href="css/content.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
+
 <body>
 	<div id="content">
+		<%-- 현재 카페 관련 탭에 있다는 걸 알려주기 위해 request 변수 설정 --%>
 		<% request.setAttribute("current", "cafe"); %>
+		<%-- 상단 메뉴바 불러오기 --%>
 		<%@ include file="./topMenu.jsp" %>
-	
+		<br/>
+		
 		<div id="pitch">
+			<%-- 버튼을 누르면 post방식으로 인자 전달 --%>
 			<form action="./writeCafe.jb" method="post">
-			<p>
-				주변역:
-				<select name="station">
+				<span style="font-size: 12pt"> 주변역 :  </span>
+				<select name="station" style="width:150px;height:50px;font-size:11pt">
 					<option value="범계역" selected>범계역</option>
 				</select>
-			</p>
-			<p>
-				평점:
-				<select name="score">
+				<br/>
+				<br/>
+				
+				<span style="font-size: 12pt"> 평점 &nbsp;&nbsp;&nbsp;: </span>
+				<select name="score" style="width:150px;height:50px;font-size:11pt">
 					<option value="1">★</option>
 					<option value="2">★★</option>
 					<option value="3">★★★</option>
 					<option value="4">★★★★</option>
 					<option value="5" selected>★★★★★</option>
 				</select>
-			</p>
-			<p>
-				상호명:<input type="text" name="name"/>
+				<br/>
+				<br/>
+				<br/>
+			
+				<span style="font-size: 12pt"> 상호명 : </span>
+				<br/>
+				<br/>
+				<input type="text" name="name" size="20" style="border: 1px solid #708090; font-size: 13pt" />
 				<c:if test="${ errors.name }">상호명을 입력하세요.</c:if>
-			</p>
-			<p>
-				한줄평:
-				<textarea name="comment" rows="5" cols="30">${ param.content }</textarea>
-			</p>
-			<input type="submit" value="평점 등록"/>
+				<br/>
+				<br/>
+			
+				<span style="font-size: 12pt"> 한줄평 :  </span>
+				<br/>
+				<br/>
+				<textarea name="comment" rows="3" cols="50" style="border: 1px solid #708090; font-size: 13pt">${ param.content }</textarea>
+				<br/>
+				<br/>
+				<br/>
+			
+				<input type="submit" value="평점 등록" style="height:70px; width:150px; font-size: 15pt" />
 			</form>
 		</div>
 		
+		<%-- 화면 하단 탭 부분 --%>
 		<div class="line"></div>
 		
 		<div id="lists">

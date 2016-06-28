@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+<%-- 게시글 수정 성공적으로 이루어졌을 경우 열리는 페이지 --%>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>게시글 수정</title>
@@ -14,15 +17,18 @@
 </head>
 <body>
 	<div id="content">
-		
+		<%-- 현재 공지사항 관련 탭에 있다는 걸 알려주기 위해 request 변수 설정 --%>
 		<% request.setAttribute("current", "notice"); %>
+		<%-- 상단 메뉴바 불러오기 --%>
 		<%@ include file="./topMenu.jsp" %>
-	
-		<div id="pitch">
-			게시글을 수정했습니다.
-			<br/>
-		</div>
+		<br/><br/><br/>
 		
+		<div id="pitch">
+			<span style="font-size: 30pt"> 게시글을 수정하였습니다. </span>
+		</div>
+		<br/><br/><br/>
+		
+		<%-- 화면 하단 탭 부분 --%>
 		<div class="line"></div>
 		
 		<div id="lists">

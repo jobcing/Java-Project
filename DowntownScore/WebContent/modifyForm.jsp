@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+<%-- 게시글 수정 FORM --%>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>게시글 수정</title>
@@ -13,32 +16,44 @@
 <link href="css/content.css" rel="stylesheet" type="text/css"
 	media="screen" />
 </head>
+
 <body>
 	<div id="content">
-
-		<%
-			request.setAttribute("current", "notice");
-		%>
+		<%-- topMenu.jsp에 현재 notice관련 페이지가 열려있다는걸 알려주기 위해 request변수 설정 --%>
+		<% request.setAttribute("current", "notice"); %>
+		<%-- topMenu.jsp 페이지를 불러온다. --%>
 		<%@ include file="./topMenu.jsp"%>
 
 		<div id="pitch">
-			<form action="modifyNotice.jb"method-"post">
-				<p>
-					번호:<br />${ modReq.noticeNumber }
-				</p>
-				<p>
-					제목:<br/><input type="text" name="title" value="${ modReq.title }"></input>
-					<c:if test="${ errors.title }">제목을 입력하세요.</c:if>
-				</p>
-				<p>
-					내용:<br/>
-					<textarea name="content" rows="5" cols="30">${ modReq.content }</textarea>
-				</p>
-				
-				<input type="submit" value="수정"></input>
+			<%-- 사용자가 입력한 데이터를 modifyNotice.jb에 post방식으로 전송 --%>
+			<form action="modifyNotice.jb" method="post">
+			<p>
+				<span style="font-size: 13pt; font-weight:bold"> No. 
+				${ modReq.noticeNumber }</span>
+			</p>
+			<br/>
+			<p>
+				<span style="font-size: 13pt; font-weight:bold"> 제목: </span><br/>
+				<%-- 제목 입력 필드 사이즈와 테두리값 설정 --%>
+				<input type="text" name="title" size="65" value="${ modReq.title }"
+										 style="width:800px; border: 1px solid #708090; font-size: 13pt"/>
+				<%-- errors.title 이 존재하면 --%>
+				<c:if test="${ errors.title }">제목을 입력하세요.</c:if>
+			</p>
+			<br/><br/>
+			<p>
+				<%-- 내용 입력 필드 행과 열 사이즈와 테두리값 설정 --%>
+				<span style="font-size: 13pt; font-weight:bold"> 내용: </span><br/>
+				<textarea name="content" rows="20" cols="65"
+							 style="width:800px; border: 1px solid #708090; font-size: 13pt">${ modReq.content }</textarea>
+			</p>
+			<br/>
+			<%-- 버튼 사이즈 설정 --%>
+			<input type="submit" style="width:840px; font-size: 15pt" value="수정"/>
 			</form>
 		</div>
 
+		<%-- 화면 하단 탭 부분 --%>
 		<div class="line"></div>
 
 		<div id="lists">
