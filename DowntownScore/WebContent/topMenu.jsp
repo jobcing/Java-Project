@@ -11,6 +11,20 @@
 </head>
 
 <body>
+
+	<%-- 로그아웃 확인 자바스크립트 --%>
+	<script type="text/javascript">
+		function logoutConfirm(){
+			if(confirm("로그아웃하시겠습니까 ?")){
+				location.href = "logout.jb";
+				
+				return true;
+			} else {
+				return false;
+			}
+		} // logoutConfirm()
+	</script>
+	
 <%
 	// request변수 current에 저장되있는 인자를 받아온다.
 	// 현재 어떤 탭에 있는지 알기위해서
@@ -19,6 +33,7 @@
 	// 현재 메인 관련 페이지라면
 	if(current.equalsIgnoreCase("main")){
 %>
+	
 	<h1>
 		<a href="./downtown_main.jb"><span>Downtown</span>Score</a>
 	</h1>
@@ -38,7 +53,8 @@
 <%	
 		} else{
 %>
-			<li><a href="./logout.jb">로그아웃</a></li>
+			
+			<li><a href="#" onclick="logoutConfirm()">로그아웃</a></li>
 <%
 		}
 %>
@@ -65,7 +81,7 @@
 <%	
 		} else{
 %>
-			<li><a href="./logout.jb">로그아웃</a></li>
+			<li><a href="#" onclick="logoutConfirm()">로그아웃</a></li>
 <%
 		}
 %>
@@ -92,7 +108,7 @@
 <%	
 		} else{
 %>
-			<li><a href="./logout.jb">로그아웃</a></li>
+			<li><a href="#" onclick="logoutConfirm()">로그아웃</a></li>
 <%
 		}
 %>
@@ -119,7 +135,7 @@
 <%	
 		} else{
 %>
-			<li><a href="./logout.jb">로그아웃</a></li>
+			<li><a href="#" onclick="logoutConfirm()">로그아웃</a></li>
 <%
 		}
 %>
@@ -146,7 +162,7 @@
 <%	
 		} else{
 %>
-			<li><a href="./logout.jb">로그아웃</a></li>
+			<li><a href="#" onclick="logoutConfirm()">로그아웃</a></li>
 <%
 		}
 %>
@@ -173,7 +189,7 @@
 <%	
 		} else{
 %>
-			<li><a href="./logout.jb">로그아웃</a></li>
+			<li><a href="#" onclick="logoutConfirm()">로그아웃</a></li>
 <%
 		}
 %>
@@ -200,7 +216,7 @@
 <%	
 		} else{
 %>
-			<li><a href="./logout.jb">로그아웃</a></li>
+			<li><a href="#" onclick="logoutConfirm()">로그아웃</a></li>
 <%
 		}
 	}

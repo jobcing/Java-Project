@@ -57,7 +57,8 @@ public class RestaurantService {
 	// 등록된 게시글을 페이지 형식으로 출력하는 메서드
 	public RestaurantPage getRestaurantPage(int pageNum, String station, String name){
 		try(Connection conn = ConnectionProvider.getConnection()){
-			int total = restaurantDao.selectCount(conn);
+			// 입력한 station, name에 해당하는 총 레코드를 구한다.
+			int total = restaurantDao.selectCount(conn, station, name);
 			// (pageNum - 1) * size 는 페이지의 시작 행 번호이다.
 			// 예를 들어, 3페이지를 요청하면 시작 행 번호는 20이 된다.
 			List<Restaurant> content = restaurantDao.select(conn, station, name, (pageNum - 1) * size, size);
@@ -71,7 +72,8 @@ public class RestaurantService {
 	// 사용자가 상호명을 입력하지 않았을때 실행되는 메서드 ( 오버로딩 )
 	public RestaurantPage getRestaurantPage(int pageNum, String station){
 		try(Connection conn = ConnectionProvider.getConnection()){
-			int total = restaurantDao.selectCount(conn);
+			// 입력한 station에 해당하는 총 레코드수를 구한다.
+			int total = restaurantDao.selectCount(conn, station);
 			// (pageNum - 1) * size 는 페이지의 시작 행 번호이다.
 			// 예를 들어, 3페이지를 요청하면 시작 행 번호는 20이 된다.
 			List<Restaurant> content = restaurantDao.select(conn, station, (pageNum - 1) * size, size);

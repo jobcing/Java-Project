@@ -69,14 +69,16 @@ public class BarDao {
 		}
 	}
 
-	// Bar 테이블의 전체 레코드 수를 리턴.
-	public int selectCount(Connection conn) throws SQLException {
-		Statement stmt = null;
+	// Bar 테이블의 사용자가 입력한 station과 일치하는 레코드 수를 반환하는 메서드
+	public int selectCount(Connection conn, String station) throws SQLException {
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select count(*) from Bar");
+			pstmt = conn.prepareStatement("select count(*) from Bar where station = ?");
+			pstmt.setString(1, station);
+			
+			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				return rs.getInt(1);
@@ -85,7 +87,31 @@ public class BarDao {
 			return 0;
 		} finally {
 			JdbcUtil.close(rs);
-			JdbcUtil.close(stmt);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
+	// Bar 테이블의 사용자가 입력한 station, name과 일치하는 레코드 수를 반환하는 메서드 ( 오버로딩 )
+	public int selectCount(Connection conn, String station, String name) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement("select count(*) from Bar where station = ?"
+							+ " and name like ?");
+			pstmt.setString(1, station);
+			pstmt.setString(2, "%" + name + "%");
+			
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
 		}
 	}
 

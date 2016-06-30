@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -30,9 +31,10 @@
 				border="1" align="center">
 				<colgroup>
 					<col width="50" />
-					<col width="500" />
-					<col width="100" />
-					<col width="50" />
+					<col width="450" />
+					<col width="70" />
+					<col width="70" />
+ 					<col width="40" />
 				</colgroup>
 				
 				<thead>
@@ -40,6 +42,7 @@
 						<th>번호</th>
 						<th>제목</th>
 						<th>작성자</th>
+						<th>작성일</th>
 						<th>조회수</th>
 					</tr>
 				</thead>
@@ -47,7 +50,7 @@
 				<tbody>
 					<c:if test="${ noticePage.hasNoNotice() }">
 						<tr>
-							<td colspan="4">게시글이 없습니다.</td>
+							<td colspan="5">게시글이 없습니다.</td>
 						</tr>
 					</c:if>
 					
@@ -60,6 +63,12 @@
 									<c:out value="${ notice.title }" />
 							</a></td>
 							<td align=center>${ notice.getWriter().getNickname() }</td>
+							<%-- JSTL fmt 라이브러리를 사용하여 날짜 포맷 --%>
+							<%-- dateStyle 종류에는 full, long, medium, short등이 정의되어있다. --%>
+							<%-- <td align=center><fmt:formatDate value="${ notice.getRegDate() }" type="both"
+												 dateStyle="short" timeStyle="short"/></td> --%>
+							<td align=center><fmt:formatDate value="${ notice.getRegDate() }" type="date"
+												 dateStyle="medium" /></td>	 
 							<td align=center>${ notice.readCount }</td>
 						</tr>
 					</c:forEach>
@@ -69,7 +78,7 @@
 				<tfoot>
 					<c:if test="${ noticePage.hasNotices() }">
 						<tr align=center height="50">
-							<td colspan="4">
+							<td colspan="5">
 								<c:if test="${ noticePage.startPage > 5 }">
 									<a href="listNotice.jb?pageNo=${ noticePage.startPage - 5 }">[이전]</a>
 								</c:if>
@@ -87,7 +96,7 @@
 					
 					<%-- 게시글 등록 버튼 --%>
 					<tr height="30">
-						<td align="right" colspan="4">
+						<td align="right" colspan="5">
 							<%-- 버튼을 클릭하면 해당 페이지로 이동 --%>
 							<input type="button" value="게시글 쓰기" onclick="location.href='writeNotice.jb'"/>
 						</td>

@@ -12,7 +12,7 @@ public class ReadNoticeService {
 	private NoticeDao noticeDao = new NoticeDao();
 	private NoticeContentDao contentDao = new NoticeContentDao();
 	
-	// 두번째 파라미터 increaseReadCount는 조회스를 증가시킬지 여부를 지정한다.
+	// 두번째 파라미터 increaseReadCount는 조회수를 증가시킬지 여부를 지정한다.
 	public NoticeData getNotice(int noticeNum, boolean increaseReadCount){
 		try(Connection conn = ConnectionProvider.getConnection()){
 			Notice notice = noticeDao.selectByNo(conn, noticeNum);

@@ -21,12 +21,12 @@
 		<% request.setAttribute("current", "notice"); %>
 		<%-- 상단 메뉴바 불러오기 --%>
 		<%@ include file="./topMenu.jsp" %>
-		<br/><br/><br/>
 		
 		<div id="pitch">
+			<br/><br/><br/>
 			<span style="font-size: 30pt"> 게시글을 수정하였습니다. </span>
+			<br/><br/><br/>
 		</div>
-		<br/><br/><br/>
 		
 		<%-- 화면 하단 탭 부분 --%>
 		<div class="line"></div>

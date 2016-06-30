@@ -56,8 +56,20 @@
 					<input type="button" value="게시글 수정"
 								 onclick="location.href='modifyNotice.jb?no=${ noticeData.notice.number }'"/>
 					
-					<input type="button" value="게시글 삭제"
-								 onclick="location.href='deleteNotice.jb?no=${ noticeData.notice.number }'"/>
+					<%-- 게시글 삭제 확인 자바스크립트 --%>
+					<script language="javascript">
+						function deleteConfirm() {
+							msg = "게시글을 정말 삭제하시겠습니까 ?";
+							
+							if (confirm(msg)!=0) {
+								location.href='deleteNotice.jb?no=${ noticeData.notice.number }';
+							} else {
+								
+							}
+						} // deleteConfirm()
+					</script>
+					
+					<input type="button" value="게시글 삭제" onclick="deleteConfirm()"/>
 					</c:if>
 				</td>
 			</tr>
