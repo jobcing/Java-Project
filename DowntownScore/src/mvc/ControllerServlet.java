@@ -1,6 +1,6 @@
-// 사용자 요청을 받아서 수행내용을 결정하는 서블릿 클래스
-
 package mvc;
+
+/********* 사용자 요청을 받아서 수행 내용을 결정하는 서블릿 클래스 *********/
 
 import java.io.*;
 import java.util.*;
@@ -59,7 +59,7 @@ public class ControllerServlet extends HttpServlet {
 	private void process(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException{
 		// 요청 파악 (request객체로부터 사용자의 요청을 파악하는 코드)
-		// URI를 명령어로 사용한다.
+		// URL를 명령어로 사용한다.
 		String command = request.getRequestURI();
 		if(command.indexOf(request.getContextPath()) == 0){
 			command = command.substring(request.getContextPath().length());

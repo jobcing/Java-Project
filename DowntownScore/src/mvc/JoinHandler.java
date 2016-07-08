@@ -1,5 +1,7 @@
 package mvc;
 
+/********* 회원가입을 할 때 사용되는 핸들러 *********/
+
 import java.util.*;
 
 import javax.servlet.http.*;
@@ -32,6 +34,7 @@ public class JoinHandler implements CommandHandler {
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res){
 		JoinRequest joinReq = new JoinRequest();
 		
+		// 사용자가 폼에 입력한 정보를 가져와서 joinReq객체에 저장한다.
 		joinReq.setId(req.getParameter("member_id"));
 		joinReq.setPwd(req.getParameter("member_pwd"));
 		joinReq.setConfirmPassword(req.getParameter("confirmPassword"));

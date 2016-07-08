@@ -1,6 +1,6 @@
-// 패스워드 등 개인정보까지 가져올 필요 없으므로 Member와 별개로 User라는 클래스 따로 생성
-
 package service;
+
+/********* 패스워드 등 개인정보까지 가져올 필요 없으므로 Member와 별개로 User라는 클래스 따로 생성 *********/
 
 public class User {
 	

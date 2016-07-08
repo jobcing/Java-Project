@@ -1,5 +1,7 @@
 package dao;
 
+/********* NOTICE DB 테이블에 직접 접근하는 클래스 *********/
+
 import java.sql.*;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +11,7 @@ import model.*;
 import util.*;
 
 public class NoticeDao {
-	
+	// 테이블 삽입 메서드
 	public Notice insert(Connection conn, Notice notice) throws SQLException{
 		PreparedStatement pstmt = null;
 		Statement stmt = null;
@@ -96,6 +98,7 @@ public class NoticeDao {
 		}
 	}
 	
+	// 데이터 베이스에 저장되있는 데이터를 Notice객체로 변환시켜주는 메서드
 	private Notice convertNotice(ResultSet rs) throws SQLException{
 		return new Notice(rs.getInt("notice_no"),
 				new Writer(rs.getString("writer_id"), rs.getString("writer_nickname")),

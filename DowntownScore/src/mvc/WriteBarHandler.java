@@ -1,5 +1,7 @@
 package mvc;
 
+/********* 술집 평점 작성 핸들러 *********/
+
 import java.util.HashMap;
 import java.util.Map;
 

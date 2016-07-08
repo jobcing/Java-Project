@@ -1,5 +1,7 @@
 package util;
 
+/********* 드라이버 유틸 클래스 ( 사용하기 편리하도록 ) *********/
+
 import java.sql.*;
 
 public class JdbcUtil {

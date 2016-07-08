@@ -13,7 +13,7 @@
 	<meta name="Robots" content="index,follow" />
 	<meta name="description" content="Description" />
 	<meta name="keywords" content="key, words" />
-	<link href="css/main.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="css/content.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 
 <body>

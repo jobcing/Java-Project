@@ -1,5 +1,7 @@
 package service;
 
+/********* 게시글, 게시글 내용의 데이터를 담고있는 클래스 *********/
+
 import model.*;
 
 public class NoticeData {

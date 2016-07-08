@@ -1,5 +1,7 @@
 package mvc;
 
+/********* 술집 평점 리스트를 보여줄 때 사용되는 핸들러 *********/
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

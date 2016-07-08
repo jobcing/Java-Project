@@ -1,6 +1,6 @@
 package service;
 
-/******* 게시글 삭제 Service *******/
+/********* 게시글 삭제 Service **********/
 
 import java.sql.Connection;
 import java.sql.SQLException;

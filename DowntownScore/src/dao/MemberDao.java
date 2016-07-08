@@ -1,6 +1,6 @@
-// DB member_admin에 접근하는 클래스
-
 package dao;
+
+/********* Member DB 테이블에 직접 접근하는 클래스 *********/
 
 import java.sql.*;
 import java.util.*;

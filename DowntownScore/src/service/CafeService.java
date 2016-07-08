@@ -1,5 +1,7 @@
 package service;
 
+/********* 카페 데이터에 관련된 메서드를 담고있는 클래스 *********/
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;

@@ -1,5 +1,7 @@
 package service;
 
+/********* 회원가입 Service *********/
+
 import java.sql.*;
 import java.util.Date;
 

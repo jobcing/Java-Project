@@ -1,12 +1,12 @@
 package mvc;
 
+/********* 로그인 핸들러 *********/
+
 import java.util.*;
 
 import javax.servlet.http.*;
 
 import service.*;
-
-/************ 로그인 핸들러 ***************/
 
 public class LoginHandler implements CommandHandler {
 	

@@ -1,5 +1,7 @@
 package service;
 
+/********* 페이지 번호에 따른 페이지를 보여주기 위한 클래스 *********/
+
 import java.util.List;
 
 import model.*;

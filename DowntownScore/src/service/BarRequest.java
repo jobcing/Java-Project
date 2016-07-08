@@ -1,5 +1,7 @@
 package service;
 
+/********* 술집 관련 데이터를 담기 위한 클래스 *********/
+
 import java.util.Map;
 
 public class BarRequest {

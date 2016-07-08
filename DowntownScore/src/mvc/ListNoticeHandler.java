@@ -1,5 +1,7 @@
 package mvc;
 
+/********* 게시글 리스트를 보여주는 핸들러 *********/
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

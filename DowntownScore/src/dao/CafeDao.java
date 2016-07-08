@@ -1,5 +1,7 @@
 package dao;
 
+/********* CAFE DB 테이블에 직접 접근하는 클래스 *********/
+
 import java.sql.*;
 import java.util.*;
 import java.util.Date;

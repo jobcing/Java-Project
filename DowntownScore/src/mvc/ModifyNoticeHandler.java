@@ -1,5 +1,7 @@
 package mvc;
 
+/********* 게시글 수정 시 사용되는 핸들러 *********/
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

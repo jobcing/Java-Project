@@ -1,5 +1,7 @@
 package service;
 
+/********* 술집 데이터에 관련된 메서드를 담고있는 클래스 *********/
+
 import java.sql.*;
 import java.util.Date;
 import java.util.List;

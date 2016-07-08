@@ -1,5 +1,7 @@
 package dao;
 
+/********* NoticeContent DB 테이블에 직접 접근하는 클래스 *********/
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +12,7 @@ import model.*;
 import util.*;
 
 public class NoticeContentDao {
-	
+	// 테이블 삽입 메서드
 	public NoticeContent insert(Connection conn, NoticeContent content) throws SQLException{
 		PreparedStatement pstmt = null;
 		
@@ -30,6 +32,7 @@ public class NoticeContentDao {
 		}
 	}
 	
+	// 선택한 번호에 해당된 게시글 내용을 리턴해주는 메서드
 	public NoticeContent selectByNo(Connection conn, int no) throws SQLException{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -49,6 +52,7 @@ public class NoticeContentDao {
 		}
 	}
 	
+	// 게시글 수정하고 DB 내용을 업데이트하는 메서드
 	public int update(Connection conn, int no, String content) throws SQLException{
 		try(PreparedStatement pstmt = conn.prepareStatement("update Notice_content set content = ? " +
 															"where notice_no = ?")){

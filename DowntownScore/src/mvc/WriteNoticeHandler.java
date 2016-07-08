@@ -1,5 +1,7 @@
 package mvc;
 
+/********* 게시글 작성 핸들러 *********/
+
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,5 +1,7 @@
 package service;
 
+/********* 사용자가 작성한 게시글 데이터를 담기 위한 클래스 *********/
+
 import java.util.Map;
 
 import model.*;

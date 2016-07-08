@@ -1,5 +1,7 @@
 package mvc;
 
+/********* 메인페이지를 보여주는 핸들러 *********/
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;

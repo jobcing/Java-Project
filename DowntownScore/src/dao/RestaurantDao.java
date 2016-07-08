@@ -1,5 +1,7 @@
 package dao;
 
+/********* Restaurant DB 테이블에 직접 접근하는 클래스 *********/
+
 import java.sql.*;
 import java.util.*;
 import java.util.Date;
@@ -29,8 +31,8 @@ public class RestaurantDao {
 
 			if (insertedCount > 0) {
 				stmt = conn.createStatement();
-				// notice 테이블에 추가된 최근 레코드의 주요키(primary key)를 구한다.
-				rs = stmt.executeQuery("select last_insert_id() from notice");
+				// Restaurant 테이블에 추가된 최근 레코드의 주요키(primary key)를 구한다.
+				rs = stmt.executeQuery("select last_insert_id() from Restaurant");
 				if (rs.next()) {
 					Integer newNum = rs.getInt(1); // 최신에 등록된 게시물 번호를 가져온다.
 					// 데이터 저장에 성공하면 Restaurant를 반환

@@ -1,5 +1,7 @@
 package service;
 
+/********* 게시글 작성 Service *********/
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;

@@ -1,5 +1,7 @@
 package service;
 
+/********* 게시글 리스트 Service *********/
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;

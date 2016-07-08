@@ -1,5 +1,7 @@
 package service;
 
+/********* 게시글 수정을 위한 데이터를 담고있는 클래스 *********/
+
 import java.util.Map;
 
 public class ModifyRequest {

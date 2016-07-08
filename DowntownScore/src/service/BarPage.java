@@ -1,17 +1,19 @@
 package service;
 
+/********* 페이지 번호에 따른 페이지를 보여주기 위한 클래스 *********/
+
 import java.util.List;
 
 import model.*;
 
 public class BarPage {
 	
-	private int total;
-	private int currentPage;
-	private List<Bar> content;
-	private int totalPage;
-	private int startPage;
-	private int endPage;
+	private int total; // 전체 데이터 개수. 총 개수를 알아야 페이지 번호 계산 가능
+	private int currentPage; // 현재 페이지 번호
+	private List<Bar> content; // 페이지 번호에 해당하는 데이터들
+	private int totalPage; // 총 페이지 개수
+	private int startPage; // 화면에 표시될 시작 페이지 번호
+	private int endPage; // 화면에 표시될 끝 페이지 번호
 	
 	public BarPage(int total, int currentPage, int size, List<Bar> content){
 		this.total = total;

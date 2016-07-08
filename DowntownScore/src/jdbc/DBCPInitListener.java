@@ -1,6 +1,6 @@
-// 커넥션 풀 초기화 클래스
-
 package jdbc;
+
+/********** 커넥션풀을 초기화해주는 클래스 **********/
 
 import java.io.*;
 import java.sql.DriverManager;
@@ -78,7 +78,6 @@ public class DBCPInitListener implements ServletContextListener{
 		}
 	}
 	
-	// ???????
 	private int getIntProperty(Properties prop, String propName, int defaultValue){
 		String value = prop.getProperty(propName);
 		if(value == null) return defaultValue;

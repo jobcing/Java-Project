@@ -21,9 +21,9 @@
 		<% request.setAttribute("current", "main"); %>
 		<%-- 상단 메뉴바 불러오기 --%>
 		<%@ include file="./topMenu.jsp" %>
-		<br/><br/><br/>
 		
 		<div id="pitch">
+		<br/><br/><br/>
 			<span style="font-size: 30pt"> 가입에 성공하였습니다.</span>
 		</div>
 		<br/><br/><br/>

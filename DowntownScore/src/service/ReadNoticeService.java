@@ -1,5 +1,7 @@
 package service;
 
+/********* 게시글 읽을 때 사용되는 메서드를 가지고 있는 클래스 *********/
+
 import java.sql.Connection;
 import java.sql.SQLException;
 

@@ -1,5 +1,7 @@
 package mvc;
 
+/********* 랭킹 리스트를 보여주는 핸들러 *********/
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,6 +25,7 @@ public class ListRankingHandler implements CommandHandler {
 		User user = (User)req.getSession(false).getAttribute("authUser");
 		req.setAttribute("userNickname", user.getNickname());
 		
+		// 페이지번호에 맞는 페이지를 보여주기 위해
 		RankingPage rankingPage = rankingService.getRankingPage(pageNo);
 		req.setAttribute("rankingPage", rankingPage);
 		

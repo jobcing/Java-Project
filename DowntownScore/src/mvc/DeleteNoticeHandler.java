@@ -1,5 +1,7 @@
 package mvc;
 
+/********* 게시글을 삭제할 때 사용되는 핸들러 *********/
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

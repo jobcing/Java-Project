@@ -1,5 +1,7 @@
 package util;
 
+/********* 로그인 체크 확인해주는 필터 클래스 *********/
+
 import java.io.IOException;
 
 import javax.servlet.*;

@@ -5,6 +5,19 @@
 
 <%-- Main Page --%>
 
+<%--
+	프로젝트 진행하면서 힘들었던 점 : 
+	1. MVC패턴을 이해하고 적용시키는 것
+	2. 상황에 따른 DB쿼리 명령어
+	3. 예기치 못한 곳에서 발생하는 오류
+	4. 게시글 삭제 기능 ( 리넘버링 )
+	5. 사용자 입력에 따른 메서드 실행 --> 오버로딩 사용
+	6. 평점 평균 구하는 기능
+	7. 오픈소스 css 적용 ( 그대로 적용할 수 없기에 수정하는 부분이 )
+	8. html 꾸미기 
+	9. 화면 페이지 이동 구현
+--%>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Downtown Score</title>

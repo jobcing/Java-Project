@@ -1,5 +1,7 @@
 package mvc;
 
+/********* 로그아웃 핸들러 *********/
+
 import java.util.*;
 
 import javax.servlet.http.*;

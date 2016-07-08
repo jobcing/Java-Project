@@ -1,6 +1,6 @@
-// DB Restaurant 테이블의 데이터를 담을 때 사용할 클래스
-
 package model;
+
+/********* DB RESTAURANT 테이블의 데이터를 담을 때 사용할 클래스 *********/
 
 import java.util.Date;
 

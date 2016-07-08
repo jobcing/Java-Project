@@ -1,5 +1,7 @@
 package mvc;
 
+/********* NULL 핸들러 *********/
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
