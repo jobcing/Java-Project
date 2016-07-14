@@ -18,7 +18,7 @@
 <body>
 	<div id="content">
 		<%-- 현재 식당 관련 탭에 있다는 걸 알려주기 위해 request 변수 설정 --%>
-		<% request.setAttribute("current", "restaurant"); %>
+		<% request.setAttribute("current", "bar"); %>
 		<%-- 상단 메뉴바 불러오기 --%>
 		<%@ include file="./topMenu.jsp" %>
 		<br/><br/><br/>

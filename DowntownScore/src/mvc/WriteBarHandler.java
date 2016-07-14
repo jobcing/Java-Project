@@ -49,7 +49,7 @@ public class WriteBarHandler implements CommandHandler {
 		int newBarNo = barService.write(barRequest);
 		req.setAttribute("newBarNo", newBarNo);
 		
-		return "./newResSuccess.jsp";
+		return "./newBarSuccess.jsp";
 	}
 	
 	private BarRequest createBarReq(User user, HttpServletRequest req){

@@ -47,7 +47,7 @@ public class WriteCafeHandler implements CommandHandler {
 		int newCafeNo = cafeService.write(cafeReq);
 		req.setAttribute("newCafeNo", newCafeNo);
 		
-		return "./newResSuccess.jsp";
+		return "./newCafeSuccess.jsp";
 	}
 	
 	private CafeRequest createCafeReq(User user, HttpServletRequest req){
