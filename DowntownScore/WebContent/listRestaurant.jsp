@@ -31,6 +31,10 @@
 				<span style="font-size: 15pt"> 주변역 :  </span>
 				<select name="station" style="width:150px; height:50px; font-size: 13pt">
 					<option value="범계역" selected>범계역</option>
+					<option value="홍대입구">홍대입구</option>
+					<option value="강남역">강남역</option>
+					<option value="수원역">수원역</option>
+					<option value="명동">명동</option>
 				</select>
 				
 				<br/><br/>

@@ -30,6 +30,7 @@ public class TextToolEx11 extends JFrame{
 								"Distinct2",
 								"패턴 적용",
 								"패턴 제거"};
+	
 	private JButton[] btn = new JButton[btnName.length];
 	
 	private final String CR_LF = System.getProperty("line.separator"); // 개행문자 (줄바꿈문자)
@@ -43,9 +44,9 @@ public class TextToolEx11 extends JFrame{
 				String curText = jta.getText();
 				
 				if(!prevText.equals(""))
-					jta.setText(prevText);
+					jta.setText(prevText); // 이전 텍스트를 출력
 				
-				prevText = curText;
+				prevText = curText; // 현재 텍스트를 저장
 			}
 		});
 		
@@ -56,13 +57,13 @@ public class TextToolEx11 extends JFrame{
 				
 				prevText = curText;
 				
-				Scanner scan = new Scanner(curText);
+				Scanner scan = new Scanner(curText); // curText로 부터 읽어온다.
 				
 				for(int i = 0; scan.hasNextLine(); i++){
 					String line = scan.nextLine();
 					
 					if(i % 2 == 0)
-						sb.append(line + CR_LF);
+						sb.append(line + CR_LF); // StringBuffer에 홀수 줄 문자열을 추가시킨다.
 				}	
 				jta.setText(sb.toString());
 			}
@@ -80,9 +81,9 @@ public class TextToolEx11 extends JFrame{
 				if("".equals(delText)) return;
 				
 				for(int i = 0; i < curText.length(); i++){
-					char ch = curText.charAt(i);
+					char ch = curText.charAt(i); // 문자를 하나씩 읽어온다.
 					
-					if(delText.indexOf(ch) == -1)
+					if(delText.indexOf(ch) == -1) // 일치하지 않다면 StringBuffer에 추가
 						sb.append(ch);
 				}
 				
@@ -169,7 +170,7 @@ public class TextToolEx11 extends JFrame{
 			}
 		});
 		
-		btn[n++].addActionListener(new ActionListener(){ // 지정된 문자열을 찾아서 그 위치까지 자르는 기능
+		btn[n++].addActionListener(new ActionListener(){ // 지정된 문자안에 포함된 문자 빼고 자르는 기능
 			public void actionPerformed(ActionEvent e){
 				String curText = jta.getText();
 				StringBuffer sb = new StringBuffer(curText.length());
@@ -378,5 +379,5 @@ public class TextToolEx11 extends JFrame{
 	
 	public static void main(String[] ar){
 		new TextToolEx11("Text Tool");
-	}
+	} // main
 }
