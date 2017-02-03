@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	
+	<!-- Mapper에 패키지명 생략해주기 위해 설정 -->
+	<typeAliases>
+		<package name="org.jb.domain" />
+	</typeAliases>
+	
+</configuration>
