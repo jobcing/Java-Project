@@ -6,22 +6,22 @@
 <html>
 
 <head>
-	<%@include file="include/header.jsp" %>
+	<%@include file="../include/header.jsp" %>
 	
-    <title>Finder Cinema</title>
+    <title>Reservation</title>
 </head>
 
 <body>
-	<%@include file="include/menu.jsp" %>
+	<%@include file="../include/menu.jsp" %>
 	
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('/resources/img/about-bg.jpg')">
+    <header class="intro-header" style="background-image: url('/resources/img/Cinema.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                        <h1>Finder Cinema</h1>
+                        <h1>Reservation</h1>
                         <hr class="small">
                         <span class="subheading">More Faster, More Simply, Enjoy the movie !</span>
                     </div>
@@ -34,18 +34,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                            Man must explore, and this is exploration at its greatest
-                        </h2>
-                        <h3 class="post-subtitle">
-                            Problems look mighty small from 150 miles up
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>
-                </div>
-                <hr>
+            	<button type="submit" class="btn btn-primary"
+            	onclick="location.href='/reserve/onestep'">GO RESERVATION</button>
+                <hr>    
                 <div class="post-preview">
                     <a href="post.html">
                         <h2 class="post-title">
@@ -91,7 +82,7 @@
 
     <hr>
 
-	<%@include file="include/footer.jsp" %>
+	<%@include file="../include/footer.jsp" %>
 </body>
 
 </html>

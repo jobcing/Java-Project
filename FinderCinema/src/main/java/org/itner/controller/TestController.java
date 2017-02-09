@@ -1,7 +1,5 @@
 package org.itner.controller;
 
-import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -10,21 +8,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Handles requests for the application home page.
+ * Handles requests for the application about page.
  */
 @Controller
-public class HomeController {
+@RequestMapping("/test/*")
+public class TestController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(TestController.class);
 	
 	/**
-	 * 홈페이지 클릭시 홈 View를 되돌려주는 컨트롤러
+	 * Test 컨트롤러
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	public String aboutGET(Model model) {
+		logger.info("test page get..............");
 		
-		return "home";
+		return "test";
 	}
 	
 }

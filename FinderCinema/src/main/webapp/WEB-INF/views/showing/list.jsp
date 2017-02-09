@@ -6,22 +6,22 @@
 <html>
 
 <head>
-	<%@include file="include/header.jsp" %>
+	<%@include file="../include/header.jsp" %>
 	
-    <title>Finder Cinema</title>
+    <title>Now Showing</title>
 </head>
 
 <body>
-	<%@include file="include/menu.jsp" %>
+	<%@include file="../include/menu.jsp" %>
 	
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('/resources/img/about-bg.jpg')">
+    <header class="intro-header" style="background-image: url('/resources/img/post-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                        <h1>Finder Cinema</h1>
+                        <h1>Now Showing</h1>
                         <hr class="small">
                         <span class="subheading">More Faster, More Simply, Enjoy the movie !</span>
                     </div>
@@ -91,7 +91,7 @@
 
     <hr>
 
-	<%@include file="include/footer.jsp" %>
+	<%@include file="../include/footer.jsp" %>
 </body>
 
 </html>
