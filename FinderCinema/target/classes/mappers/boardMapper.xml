@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.itner.mapper.BoardMapper">
+
+	<insert id="create">
+	INSERT into review_board (title, content, writer)
+	VALUES (#{title}, #{content}, #{writer})
+	</insert>
+	
+	<select id="read" resultType="BoardVO">
+	SELECT bno, title, content, writer, regdate, viewcnt
+	FROM review_board
+	WHERE bno = #{bno}
+	</select>
+	
+	<update id="update">
+	UPDATE review_board
+	SET title = #{title}, content = #{content}
+	WHERE bno = #{bno}
+	</update>
+	
+	<delete id="delete">
+	DELETE FROM review_board
+	WHERE bno = #{bno}
+	</delete>
+	
+	<select id="listAll" resultType="BoardVO">
+	<![CDATA[
+	SELECT bno, title, content, writer, regdate, viewcnt
+	FROM review_board
+	WHERE bno > 0
+	ORDER BY bno DESC, regdate DESC
+	]]>
+	</select>
+	
+	<select id="listPage" resultType="BoardVO">
+	<![CDATA[
+	SELECT bno, title, writer, regdate, viewcnt
+	FROM review_board
+	WHERE bno > 0
+	ORDER BY bno DESC, regdate DESC
+	LIMIT #{page}, 10
+	]]>
+	</select>
+	
+</mapper>

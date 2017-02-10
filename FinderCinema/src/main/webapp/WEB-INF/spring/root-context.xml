@@ -19,6 +19,7 @@
 	</bean>
 	
 	<!-- MyBatis SqlSession 설정, Mapper 연결 -->
+	<!-- mappers 폴더 아래있는 모든 *Mapper.xml을 링크 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
@@ -29,7 +30,8 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 	
-	<!-- org.itner.persistence 패키지를 자동으로 인식시켜주기 위한 설정 -->
+	<!-- 패키지를 자동으로 인식시켜주기 위한 설정 -->
 	<context:component-scan base-package="org.itner.persistence"></context:component-scan>
+	<context:component-scan base-package="org.itner.service"></context:component-scan>
 	
 </beans>

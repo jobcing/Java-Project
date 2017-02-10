@@ -43,7 +43,7 @@ public class ReserveController {
 	 * 두번째 단계를 보여주는 View를 제공
 	 */
 	@RequestMapping(value = "/twostep", method = RequestMethod.POST)
-	public String twostepPOST(@RequestParam("data") Object data, Model model){
+	public String twostepPOST(@RequestParam("data") List<Object> data, Model model){
 		logger.info("reservation two step page post............");
 		
 		model.addAttribute("data", data);

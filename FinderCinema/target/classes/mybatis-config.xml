@@ -7,7 +7,7 @@
 	
 	<!-- Mapper에 패키지명 생략해주기 위해 설정 -->
 	<typeAliases>
-		<package name="org.jb.domain" />
+		<package name="org.itner.domain" />
 	</typeAliases>
 	
 </configuration>

@@ -321,15 +321,14 @@
 				</script>
                 <hr>
                     
-                <form role="form" action="/reserve/twostep" method="POST">
+				<form role="form" action="/reserve/twostep" method="POST">
                 
-                <input type="hidden" name="data" value="&{placesData};">
+                <!--  <input type="hidden" name="data" value="&{placesData};"> -->
                 
             	<button type="submit" class="btn btn-primary">NEXT</button>
             	
-                </form>
-                
-				<h1>'placesData'</h1>
+            	</form>
+            	
             </div>
         </div>
     </div>
