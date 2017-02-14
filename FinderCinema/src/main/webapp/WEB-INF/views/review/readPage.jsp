@@ -21,9 +21,10 @@
 		</div>
     </header>
     
-    <!-- 수정이나 삭제 페이지로 이동시 게시글 번호가 필요하므로 bno값을 전달하기 위해 input hidden 사용 -->
+    <!-- 수정이나 삭제 페이지로 이동시 게시글 번호와 목록 페이지번호를 전달하기 위해 input hidden 사용 -->
     <form role="form" method="post">
     	<input type="hidden" name="bno" value="${ boardVO.bno }">
+    	<input type="hidden" name="page" value="${ page }">
     </form>
 
     <!-- Main Content -->
@@ -76,18 +77,21 @@
 			console.log(formObj);
 			
 			$(".btn-warning").on("click", function(){
-				formObj.attr("action", "/review/modify");
+				formObj.attr("action", "/review/modifyPage");
 				formObj.attr("method", "get");
 				formObj.submit();
 			});
 			
 			$(".btn-danger").on("click", function(){
-				formObj.attr("action", "/review/remove");
+				// formObj.attr("method", "get"); 왜 get이지??
+				formObj.attr("action", "/review/removePage");
 				formObj.submit();
 			});
 			
 			$(".btn-primary").on("click", function(){
-				self.loaction = "/review/listAll";
+				formObj.attr("method", "get");
+				formObj.attr("action", "/board/listPage");
+				formObj.submit();
 			});
 		});
 	

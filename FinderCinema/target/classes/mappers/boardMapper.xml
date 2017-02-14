@@ -27,15 +27,6 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	WHERE bno = #{bno}
 	</delete>
 	
-	<select id="listAll" resultType="BoardVO">
-	<![CDATA[
-	SELECT bno, title, content, writer, regdate, viewcnt
-	FROM review_board
-	WHERE bno > 0
-	ORDER BY bno DESC, regdate DESC
-	]]>
-	</select>
-	
 	<select id="listPage" resultType="BoardVO">
 	<![CDATA[
 	SELECT bno, title, writer, regdate, viewcnt
@@ -43,6 +34,14 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	WHERE bno > 0
 	ORDER BY bno DESC, regdate DESC
 	LIMIT #{page}, 10
+	]]>
+	</select>
+	
+	<select id="countPaging" resultType="int">
+	<![CDATA[
+	SELECT count(bno)
+	FROM review_board
+	WHERE bno > 0
 	]]>
 	</select>
 	

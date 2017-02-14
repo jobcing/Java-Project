@@ -30,7 +30,7 @@
                         <a href="/reserve/list">Reservation</a>
                     </li>
                     <li>
-                        <a href="/reviews/list">Reviews</a>
+                        <a href="/review/listPage">Reviews</a>
                     </li>
                 </ul>
             </div>

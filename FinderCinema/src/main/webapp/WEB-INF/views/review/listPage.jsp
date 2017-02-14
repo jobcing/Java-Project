@@ -34,6 +34,7 @@
     <div class="container">
         <div class="row">
         	<table class="table table-bordered">
+        		<!-- 게시글 상단 -->
         		<tr>
         			<th style="width: 10px">BNO</th>
         			<th>TITLE</th>
@@ -41,12 +42,13 @@
         			<th>REGDATE</th>
         			<th style="width: 40px">VIEWCNT</th>
         		</tr>
-        		
+        		<!-- 게시글 목록 -->
         		<c:forEach items="${ list }" var="boardVO">
         		
         			<tr>
         				<td>${ boardVO.bno }</td>
-        				<td><a href="/board/read?bno=${ boardVO.bno }">${ boardVO.title }</a></td>
+        				<td><a href="/review/readPage?bno=${ boardVO.bno }&page=${ pageMaker.page }">
+        					${ boardVO.title }</a></td>
         				<td>${ boardVO.writer }</td>
         				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ boardVO.regdate }" /></td>
         				<td><span class="badge bg-red">${ boardVO.viewcnt }</span></td>
@@ -54,6 +56,31 @@
         		</c:forEach>
         	</table>
         </div>
+    </div>
+    <!-- 페이지 링크 제공 UI -->
+    <div class="text-center">
+    	<ul class="pagination">
+    	
+    		<!-- [이전] 버튼이 있다면 -->
+    		<c:if test="${ pageMaker.prev }">
+    			<li><a href="listPage?page=${ pageMaker.startPage - 1 }">&laquo;</a></li>
+ 			</c:if>
+ 			
+ 			<!-- 페이지 번호 출력 -->
+ 			<c:forEach begin="${ pageMaker.startPage }" end="${ pageMaker.endPage }" var="idx">
+ 				<!-- 현재 페이지를 표시 -->
+ 				<li
+ 					<c:out value="${ pageMaker.page == idx ? 'class = active' : '' }"/>>
+ 					<a href="listPage?page=${ idx }">${ idx }</a>
+ 				</li>
+ 			</c:forEach>
+ 			
+ 			<!-- [다음] 버튼이 있다면 -->
+ 			<c:if test="${ pageMaker.next && pageMaker.endPage > 0 }">
+ 				<li><a href="listPage?page=${ pageMaker.endPage + 1 }">&raquo;</a></li>
+ 			</c:if>
+ 			
+    	</ul>
     </div>
 
     <hr>

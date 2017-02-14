@@ -17,5 +17,7 @@ public interface BoardService {
 	
 	public void remove(Integer bno) throws Exception;
 	
-	public List<BoardVO> listAll() throws Exception;
+	public List<BoardVO> listPage(int page) throws Exception;
+	
+	public int listCountPage() throws Exception;
 }

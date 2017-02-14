@@ -37,10 +37,15 @@ public class BoardServiceImpl implements BoardService {
 	public void remove(Integer bno) throws Exception {
 		dao.delete(bno);
 	}
+	
+	@Override
+	public List<BoardVO> listPage(int page) throws Exception {
+		return dao.listPage(page);
+	}
 
 	@Override
-	public List<BoardVO> listAll() throws Exception {
-		return dao.listAll();
+	public int listCountPage() throws Exception {
+		return dao.countPaging();
 	}
 
 }

@@ -24,8 +24,11 @@
     <!-- Main Content -->
     <div class="container">
         <div class="row">
-        	<form role="form" method="post">
         	<!-- action속성이 지정되지 않으면 현재 경로를 그대로 action의 대상경로가 된다. -->
+        	<form role="form" method="post">
+        		<!-- hidden 타입으로 페이지 번호도 함께 전송한다. -->
+        		<input type="hidden" name="page" value="${ page }">
+        	
         		<div class="box-body">
         			<div class="form-group">
 	           			<label for="exampleInputEmail1">BNO</label>
@@ -77,7 +80,8 @@
 			});
 			
 			$(".btn-warning").on("click", function(){
-				self.location = "/review/listAll";
+				self.location = "/review/listPage?page=${ page }";
+				// 취소버튼을 누르면 원래 있던 목록 페이지로 이동하도록
 			});
 		});
 	
