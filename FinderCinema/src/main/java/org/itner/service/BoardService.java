@@ -3,6 +3,7 @@ package org.itner.service;
 import java.util.List;
 
 import org.itner.domain.BoardVO;
+import org.itner.domain.Criteria;
 
 /*
  * 컨트롤러와 DAO를 연결해주는 BoardService (비즈니스 계층)
@@ -17,7 +18,7 @@ public interface BoardService {
 	
 	public void remove(Integer bno) throws Exception;
 	
-	public List<BoardVO> listPage(int page) throws Exception;
+	public List<BoardVO> listPage(Criteria cri) throws Exception;
 	
 	public int listCountPage() throws Exception;
 }

@@ -32,6 +32,36 @@
 
     <!-- Main Content -->
     <div class="container">
+    	<!-- 검색창 -->
+    	<div class="box-body">
+    		<select name="searchType">
+    			<!-- 검색 조건이 없음 -->
+    			<option value="n"
+    				<c:out value="${ cri.searchType == null ? 'selected' : '' }" />>
+    				---</option>
+    			<!-- 제목으로 검색 -->
+    			<option value="t"
+    				<c:out value="${ cri.searchType eq 't' ? 'selected' : '' }" />>
+    				제목</option>
+    			<!-- 내용으로 검색 -->
+    			<option value="c"
+    				<c:out value="${ cri.searchType eq 'c' ? 'selected' : '' }" />>
+    				내용</option>
+    			<!-- 제목이나 내용으로 검색 -->
+    			<option value="tc"
+    				<c:out value="${ cri.searchType eq 'tc' ? 'selected' : '' }" />>
+    				내용 OR 제목</option>
+    			<!-- 작성자로 검색 -->
+    			<option value="w"
+    				<c:out value="${ cri.searchType eq 'w' ? 'selected' : '' }" />>
+    				작성자</option>
+    		</select>
+    		
+    		<input type="text" name="keyword" id="keywordInput" value="${ cri.keyword }">
+    		<button id="searchBtn">검색</button>
+    		<button id="newBtn">글작성</button>
+    	</div>
+    	<!-- 게시글 -->
         <div class="row">
         	<table class="table table-bordered">
         		<!-- 게시글 상단 -->
@@ -47,7 +77,8 @@
         		
         			<tr>
         				<td>${ boardVO.bno }</td>
-        				<td><a href="/review/readPage?bno=${ boardVO.bno }&page=${ pageMaker.page }">
+        				<!-- 복잡한 URI를 메소드를 통해 생성 -->
+        				<td><a href="/review/readPage${ pageMaker.makeURI(pageMaker.cri.page) }&bno=${ boardVO.bno }">
         					${ boardVO.title }</a></td>
         				<td>${ boardVO.writer }</td>
         				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ boardVO.regdate }" /></td>
@@ -63,21 +94,23 @@
     	
     		<!-- [이전] 버튼이 있다면 -->
     		<c:if test="${ pageMaker.prev }">
-    			<li><a href="listPage?page=${ pageMaker.startPage - 1 }">&laquo;</a></li>
+    			<!-- 복잡한 URI를 pageMaker의 makeURI 메소드를 통해 생성 -->
+    			<li><a href="listPage${ pageMaker.makeURI(pageMaker.startPage - 1) }">
+        		&laquo;</a></li>
  			</c:if>
  			
  			<!-- 페이지 번호 출력 -->
  			<c:forEach begin="${ pageMaker.startPage }" end="${ pageMaker.endPage }" var="idx">
  				<!-- 현재 페이지를 표시 -->
  				<li
- 					<c:out value="${ pageMaker.page == idx ? 'class = active' : '' }"/>>
- 					<a href="listPage?page=${ idx }">${ idx }</a>
+ 					<c:out value="${ pageMaker.cri.page == idx ? 'class = active' : '' }"/>>
+ 					<a href="listPage${ pageMaker.makeURI(idx) }">${ idx }</a>
  				</li>
  			</c:forEach>
  			
  			<!-- [다음] 버튼이 있다면 -->
  			<c:if test="${ pageMaker.next && pageMaker.endPage > 0 }">
- 				<li><a href="listPage?page=${ pageMaker.endPage + 1 }">&raquo;</a></li>
+ 				<li><a href="listPage${ pageMaker.makeURI(pageMaker.endPage + 1) }">&raquo;</a></li>
  			</c:if>
  			
     	</ul>
@@ -88,6 +121,21 @@
 	<%@include file="../include/footer.jsp" %>
 	
 	<script>
+	
+		$(document).ready(function(){
+			// 검색버튼 이벤트 등록
+			$("#searchBtn").on("click", function(event){
+				self.location = "listPage"
+					+ "?page=1"
+					+ "&searchType=" + $("select option:selected").val()
+					+ "&keyword=" + $("#keywordInput").val();
+			});
+			
+			// 글작성 버튼 이벤트 등록
+			$("#newBtn").on("click", function(event){
+				self.location = "register";
+			});
+		});
 	
 		var result = '${msg}';
 		

@@ -1,5 +1,8 @@
 package org.itner.domain;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 /*
  * 페이징 처리 계산을 위한 클래스
  */
@@ -14,10 +17,10 @@ public class PageMaker {
 	
 	private int displayPageNum = 10; // 페이지 당 보여지는 게시글 개수
 	
-	private int page; // 현재 몇 페이지에 있는지를 담을 변수
+	private Criteria cri; // 현재 페이지 번호를 관리하고 있는 도메인 클래스
 	
-	public void setPage(int page){
-		this.page = page;
+	public void setCri(Criteria cri){
+		this.cri = cri;
 	}
 	
 	public void setTotalCount(int totalCount){
@@ -28,7 +31,7 @@ public class PageMaker {
 	
 	private void calcData(){
 		// Math.ceil : 올림
-		endPage = (int) (Math.ceil(page / (double) displayPageNum) * displayPageNum);
+		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
 		startPage = (endPage - displayPageNum) + 1;
 		
 		// 만약 총 데이터 개수가 displayPageNum 배수로 안떨어진다면 데이터 개수가 있는데 까지만
@@ -44,6 +47,18 @@ public class PageMaker {
 		// (현재 보여지는 끝 페이지 번호 * 한 페이지에 보여지는 게시글의 개수) 가
 		// 전체 게시글 개수보다 많다면 [다음] 버튼이 생성되어야 하므로 true를 저장. 아니라면 false
 		next = endPage * displayPageNum >= totalCount ? false : true;
+	}
+	
+	// 복잡한 URI를 메소드를 통해 설정
+	public String makeURI(int page){
+		UriComponents uriComponents =
+				UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("searchType", cri.getSearchType())
+				.queryParam("keyword", cri.getKeyword())
+				.build();
+		
+		return uriComponents.toUriString();
 	}
 	
 	public void setStartPage(int startPage){
@@ -62,8 +77,8 @@ public class PageMaker {
 		this.next = next;
 	}
 	
-	public int getPage(){
-		return this.page;
+	public Criteria getCri(){
+		return this.cri;
 	}
 	
 	public int getTotalCount(){

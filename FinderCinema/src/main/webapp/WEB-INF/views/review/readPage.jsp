@@ -24,43 +24,40 @@
     <!-- 수정이나 삭제 페이지로 이동시 게시글 번호와 목록 페이지번호를 전달하기 위해 input hidden 사용 -->
     <form role="form" method="post">
     	<input type="hidden" name="bno" value="${ boardVO.bno }">
-    	<input type="hidden" name="page" value="${ page }">
+    	<input type="hidden" name="page" value="${ cri.page }">
     </form>
 
     <!-- Main Content -->
     <div class="container">
         <div class="row">
-        	<form role="form" method="post">
-        	<!-- action속성이 지정되지 않으면 현재 경로를 그대로 action의 대상경로가 된다. -->
-        		<div class="box-body">
-	           		<div class="form-group">
-	           			<label for="exampleInputEmail1">Title</label>
-	           			<input type="text" name="title" class="form-control"
-	           				value="${ boardVO.title }" readonly="readonly">
-	           		</div>
+			<div class="box-body">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Title</label>
+					<input type="text" name="title" class="form-control"
+						value="${ boardVO.title }" readonly="readonly">
+				</div>
 	           		
-	           		<div class="form-group">
-	           			<label for="exampleInputPassword1">Content</label>
-	           			<textarea class="form-control" name="content" rows="3"
-	           				readonly="readonly">${ boardVO.content }
-	           			</textarea>
-	           		</div>
-	           		
-	           		<div class="form-group">
-	           			<label for="exampleInputEmail1">Writer</label>
-	           			<input type="text" name="writer" class="form-control"
-	           				value="${ boardVO.writer }" readonly="readonly">
-	           		</div>
+	           	<div class="form-group">
+	           		<label for="exampleInputPassword1">Content</label>
+	           		<textarea class="form-control" name="content" rows="3"
+	           			readonly="readonly">${ boardVO.content }
+	           		</textarea>
 	           	</div>
-           		<!-- /.box-body -->
+	           		
+	           	<div class="form-group">
+	           		<label for="exampleInputEmail1">Writer</label>
+	           		<input type="text" name="writer" class="form-control"
+	           			value="${ boardVO.writer }" readonly="readonly">
+	           	</div>
+			</div>
+           	<!-- /.box-body -->
            	
-           		<div class="box-footer">
-           			<button type="submit" class="btn btn-warning">수정</button>
-           			<button type="submit" class="btn btn-danger">삭제</button>
-           			<button type="submit" class="btn btn-primary">목록</button>
-           		</div>
-           		<!-- /.box-footer -->
-           	</form>
+           	<div class="box-footer">
+           		<button type="submit" class="btn btn-warning">수정</button>
+           		<button type="submit" class="btn btn-danger">삭제</button>
+           		<button type="submit" class="btn btn-primary">목록</button>
+           	</div>
+           	<!-- /.box-footer -->
 		</div>
     </div>
 
@@ -76,21 +73,24 @@
 			
 			console.log(formObj);
 			
+			// 수정버튼
 			$(".btn-warning").on("click", function(){
 				formObj.attr("action", "/review/modifyPage");
 				formObj.attr("method", "get");
 				formObj.submit();
 			});
 			
+			// 삭제버튼
 			$(".btn-danger").on("click", function(){
 				// formObj.attr("method", "get"); 왜 get이지??
 				formObj.attr("action", "/review/removePage");
 				formObj.submit();
 			});
 			
+			// 목록버튼
 			$(".btn-primary").on("click", function(){
 				formObj.attr("method", "get");
-				formObj.attr("action", "/board/listPage");
+				formObj.attr("action", "/review/listPage");
 				formObj.submit();
 			});
 		});

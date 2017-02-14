@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	FROM review_board
 	WHERE bno > 0
 	ORDER BY bno DESC, regdate DESC
-	LIMIT #{page}, 10
+	LIMIT #{pageStart}, #{perPageNum}
 	]]>
 	</select>
 	
