@@ -27,12 +27,37 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	WHERE bno = #{bno}
 	</delete>
 	
+	<!-- 동일한 SQL구문을 재사용할 수 있도록 sql 태그 사용 -->
+	<sql id="search">
+		<!-- 검색에 따른 동적 SQL -->
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				AND title LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				AND content LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				AND ( title LIKE CONCAT('%', #{keyword}, '%') OR content LIKE CONCAT('%', #{keyword}, '%') )
+			</if>
+			<if test="searchType == 'w'.toString()">
+				AND writer LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	
 	<select id="listPage" resultType="BoardVO">
 	<![CDATA[
 	SELECT bno, title, writer, regdate, viewcnt
 	FROM review_board
 	WHERE bno > 0
-	ORDER BY bno DESC, regdate DESC
+	]]>
+	
+	<!-- 검색을 했을 경우 실행되는 동적 SQL INCLUDE -->
+	<include refid="search"></include>
+	
+	<![CDATA[
+	ORDER BY bno DESC
 	LIMIT #{pageStart}, #{perPageNum}
 	]]>
 	</select>
@@ -43,6 +68,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	FROM review_board
 	WHERE bno > 0
 	]]>
+	
+	<!-- 검색을 했을 경우 실행되는 동적 SQL INCLUDE -->
+	<include refid="search"></include>
+	
 	</select>
 	
 </mapper>

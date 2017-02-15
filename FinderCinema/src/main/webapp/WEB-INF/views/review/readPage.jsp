@@ -21,10 +21,12 @@
 		</div>
     </header>
     
-    <!-- 수정이나 삭제 페이지로 이동시 게시글 번호와 목록 페이지번호를 전달하기 위해 input hidden 사용 -->
+    <!-- 수정이나 삭제 페이지로 이동시 (게시글 번호/현재 페이지 번호/검색 유형/검색어)를 전달하기 위해 input hidden 사용 -->
     <form role="form" method="post">
     	<input type="hidden" name="bno" value="${ boardVO.bno }">
     	<input type="hidden" name="page" value="${ cri.page }">
+    	<input type="hidden" name="searchType" value="${ cri.searchType }">
+    	<input type="hidden" name="keyword" value="${ cri.keyword }">
     </form>
 
     <!-- Main Content -->
@@ -82,7 +84,6 @@
 			
 			// 삭제버튼
 			$(".btn-danger").on("click", function(){
-				// formObj.attr("method", "get"); 왜 get이지??
 				formObj.attr("action", "/review/removePage");
 				formObj.submit();
 			});

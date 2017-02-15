@@ -20,5 +20,5 @@ public interface BoardService {
 	
 	public List<BoardVO> listPage(Criteria cri) throws Exception;
 	
-	public int listCountPage() throws Exception;
+	public int listCountPage(Criteria cri) throws Exception;
 }

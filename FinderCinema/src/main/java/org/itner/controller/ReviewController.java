@@ -68,7 +68,11 @@ public class ReviewController {
 		logger.info("review remove.................");
 		service.remove(bno);
 		
+		// 삭제 후 페이지를 유지하기 위해 listPage에 데이터 전송
 		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		
 		rttr.addFlashAttribute("msg", "SUCCESS"); // msg는 임시로 사용된다.
 		
 		return "redirect:/review/listPage";
@@ -93,8 +97,12 @@ public class ReviewController {
 		// 수정된 데이터를 자동으로 수집해서 BoardVO로 만든다.
 		// 수집된 BoardVO를 이용해서 게시글을 수정한다.
 		service.modify(board);
-		
+
+		// 수정 후 페이지를 유지하기 위해 listPage에 데이터 전송
 		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		
 		return "redirect:/review/listPage";
@@ -111,7 +119,7 @@ public class ReviewController {
 		PageMaker pageMaker = new PageMaker();
 		
 		pageMaker.setCri(cri); // 현재 페이지 설정
-		pageMaker.setTotalCount(service.listCountPage()); // 전체 게시글 개수 설정
+		pageMaker.setTotalCount(service.listCountPage(cri)); // 전체 게시글 개수 설정
 		
 		model.addAttribute("pageMaker", pageMaker); // 페이징 계산 결과 전송
 	}

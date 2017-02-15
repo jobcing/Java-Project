@@ -26,8 +26,10 @@
         <div class="row">
         	<!-- action속성이 지정되지 않으면 현재 경로를 그대로 action의 대상경로가 된다. -->
         	<form role="form" method="post">
-        		<!-- hidden 타입으로 페이지 번호도 함께 전송한다. -->
+        		<!-- hidden 타입으로 (현재 페이지 번호/검색 유형/검색어)도 함께 전송한다. -->
         		<input type="hidden" name="page" value="${ cri.page }">
+        		<input type="hidden" name="searchType" value="${ cri.searchType }">
+        		<input type="hidden" name="keyword" value="${ cri.keyword }">
         	
         		<div class="box-body">
         			<div class="form-group">
@@ -80,8 +82,10 @@
 			});
 			
 			$(".btn-warning").on("click", function(){
-				self.location = "/review/listPage?page=${ cri.page }";
 				// 취소버튼을 누르면 원래 있던 목록 페이지로 이동하도록
+				self.location = "/review/listPage?page=${ cri.page }"
+							  + "&searchType=${ cri.searchType }"
+							  + "&keyword=${ cri.keyword }";
 			});
 		});
 	

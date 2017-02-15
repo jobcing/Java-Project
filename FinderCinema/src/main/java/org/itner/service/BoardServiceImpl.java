@@ -45,8 +45,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int listCountPage() throws Exception {
-		return dao.countPaging();
+	public int listCountPage(Criteria cri) throws Exception {
+		return dao.countPaging(cri);
 	}
 
 }

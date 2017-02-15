@@ -48,8 +48,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public int countPaging() throws Exception {
-		return session.selectOne(namespace + ".countPaging");
+	public int countPaging(Criteria cri) throws Exception {
+		return session.selectOne(namespace + ".countPaging", cri);
 	}
 	
 }
