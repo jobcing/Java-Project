@@ -29,11 +29,13 @@ public class ReviewController {
 	@Inject
 	private BoardService service;
 	
+	// 게시글 작성 GET
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public void registerGET(BoardVO board, Model model) throws Exception{
 		logger.info("review register get...........");
 	}
 	
+	// 게시글 등록 POST
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerPOST(BoardVO board, RedirectAttributes rttr) throws Exception{
 		// 모든 데이터를 BoardVO로 자동 수집
@@ -49,6 +51,7 @@ public class ReviewController {
 		// 게시글 등록에 성공하면 게시글 목록을 보여주도록 설정
 	}
 	
+	// 게시글 조회 GET
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
 	public void read(@RequestParam("bno") int bno,
 					 @ModelAttribute("cri") Criteria cri,
@@ -60,6 +63,7 @@ public class ReviewController {
 		// 변수명을 입력하지않고 데이터를 보내면 자동으로 클래스의 이름을 소문자로 시작해서 사용한다.
 	}
 	
+	// 게시글 삭제 POST
 	@RequestMapping(value = "/removePage", method = RequestMethod.POST)
 	public String remove(@RequestParam("bno") int bno,
 						 @ModelAttribute("cri") Criteria cri,
@@ -78,6 +82,7 @@ public class ReviewController {
 		return "redirect:/review/listPage";
 	}
 	
+	// 게시글 수정 GET
 	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
 	public void modifyGET(@RequestParam("bno") int bno,
 						  @ModelAttribute("cri") Criteria cri,
@@ -88,6 +93,7 @@ public class ReviewController {
 		model.addAttribute(service.read(bno));
 	}
 	
+	// 게시글 수정 POST
 	@RequestMapping(value = "/modifyPage", method = RequestMethod.POST)
 	public String modifyPOST(@ModelAttribute("board") BoardVO board,
 							 @ModelAttribute("cri") Criteria cri,
@@ -108,6 +114,7 @@ public class ReviewController {
 		return "redirect:/review/listPage";
 	}
 	
+	// 게시글 목록 GET
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
 		// @ModelAttribute를 사용함으로써 Criteria 클래스가 자동으로 View로 전송

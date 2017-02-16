@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- REVIEWS 게시판 댓글 관련 SQL -->
+
+<mapper namespace="org.itner.mapper.ReplyMapper">
+
+	<insert id="create">
+	INSERT into review_reply (bno, replytext, replyer)
+	VALUES (#{bno}, #{replytext}, #{replyer})
+	</insert>
+	
+	<delete id="delete">
+	DELETE FROM review_reply
+	WHERE rno = #{rno}
+	</delete>
+	
+	<update id="update">
+	UPDATE review_reply
+	SET replytext = #{replytext}, updatedate = now()
+	WHERE rno = #{rno}
+	</update>
+	
+	<select id="listPage" resultType="ReplyVO">
+	SELECT *
+	FROM review_reply
+	WHERE bno = #{bno}
+	ORDER BY rno DESC
+	LIMIT #{cri.pageStart}, #{cri.perPageNum} 
+	</select>
+	
+	<select id="count" resultType="int">
+	SELECT count(bno)
+	FROM review_reply
+	WHERE bno = #{bno}
+	</select>
+	
+</mapper>
