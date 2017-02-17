@@ -24,6 +24,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	WHERE bno = #{bno}
 	</update>
 	
+	<update id="updateReplyCnt">
+	UPDATE review_board
+	SET replycnt = replycnt + #{amount}
+	WHERE bno = #{bno}
+	</update>
+	
 	<delete id="delete">
 	DELETE FROM review_board
 	WHERE bno = #{bno}
@@ -50,7 +56,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	
 	<select id="listPage" resultType="BoardVO">
 	<![CDATA[
-	SELECT bno, title, writer, regdate, viewcnt
+	SELECT bno, title, writer, regdate, viewcnt, replycnt
 	FROM review_board
 	WHERE bno > 0
 	]]>

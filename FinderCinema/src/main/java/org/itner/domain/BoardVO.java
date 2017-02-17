@@ -14,6 +14,7 @@ public class BoardVO {
 	private String writer;
 	private Date regdate;
 	private int viewcnt;
+	private int replycnt;
 	
 	public void setBno(Integer bno){
 		this.bno = bno;
@@ -39,6 +40,10 @@ public class BoardVO {
 		this.viewcnt = viewcnt;
 	}
 	
+	public void setReplycnt(int replycnt){
+		this.replycnt = replycnt;
+	}
+	
 	public Integer getBno(){
 		return this.bno;
 	}
@@ -61,5 +66,9 @@ public class BoardVO {
 	
 	public int getViewcnt(){
 		return this.viewcnt;
+	}
+	
+	public int getReplycnt(){
+		return this.replycnt;
 	}
 }

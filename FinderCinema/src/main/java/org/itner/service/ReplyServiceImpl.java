@@ -6,8 +6,10 @@ import javax.inject.Inject;
 
 import org.itner.domain.Criteria;
 import org.itner.domain.ReplyVO;
+import org.itner.persistence.BoardDAO;
 import org.itner.persistence.ReplyDAO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /*
  * ReplyService 인터페이스를 구현한 클래스
@@ -17,31 +19,40 @@ import org.springframework.stereotype.Service;
 public class ReplyServiceImpl implements ReplyService {
 
 	@Inject
-	private ReplyDAO dao;
+	private ReplyDAO replyDao;
 	
+	@Inject
+	private BoardDAO boardDao;
+	
+	@Transactional
 	@Override
 	public void registReply(ReplyVO vo) throws Exception {
-		dao.create(vo);
+		replyDao.create(vo);
+		boardDao.updateReplyCnt(vo.getBno(), 1);
 	}
 
 	@Override
 	public List<ReplyVO> listReplyPage(Integer bno, Criteria cri) throws Exception {
-		return dao.listPage(bno, cri);
+		return replyDao.listPage(bno, cri);
 	}
 
 	@Override
 	public void modifyReply(ReplyVO vo) throws Exception {
-		dao.update(vo);
+		replyDao.update(vo);
 	}
 
+	@Transactional
 	@Override
 	public void removeReply(Integer rno) throws Exception {
-		dao.delete(rno);
+		int bno = replyDao.getBno(rno);
+		
+		replyDao.delete(rno);
+		boardDao.updateReplyCnt(bno, -1);
 	}
 
 	@Override
 	public int count(Integer bno) throws Exception {
-		return dao.count(bno);
+		return replyDao.count(bno);
 	}
 
 }

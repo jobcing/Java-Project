@@ -37,4 +37,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	WHERE bno = #{bno}
 	</select>
 	
+	<select id="getBno" resultType="int">
+	SELECT bno
+	FROM review_reply
+	WHERE rno = #{rno}
+	</select>
+	
 </mapper>
