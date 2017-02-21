@@ -30,6 +30,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	WHERE bno = #{bno}
 	</update>
 	
+	<update id="updateViewCnt">
+	UPDATE review_board
+	SET viewcnt = viewcnt + 1
+	WHERE bno = #{bno}
+	</update>
+	
 	<delete id="delete">
 	DELETE FROM review_board
 	WHERE bno = #{bno}

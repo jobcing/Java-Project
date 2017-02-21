@@ -23,4 +23,24 @@
 	
 	<context:component-scan base-package="org.itner.controller" />
 	
+	<!-- LoginInterceptor 등록 -->
+	<beans:bean id="loginInterceptor" class="org.itner.interceptor.LoginInterceptor"></beans:bean>
+	<!-- Auth Interceptor 등록 -->
+	<beans:bean id="authInterceptor" class="org.itner.interceptor.AuthInterceptor"></beans:bean>
+	
+	<!-- Interceptor 설정 -->
+	<interceptors>
+	
+		<interceptor>
+			<mapping path="/user/loginPost" />
+			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/review/register" />
+			<beans:ref bean="authInterceptor" />
+		</interceptor>
+		
+	</interceptors>
+	
 </beans:beans>

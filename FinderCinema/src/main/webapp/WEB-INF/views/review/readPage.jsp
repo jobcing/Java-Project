@@ -40,14 +40,14 @@
 					<input type="text" name="title" class="form-control"
 						value="${ boardVO.title }" readonly="readonly">
 				</div>
-	           		
+	           	
 	           	<div class="form-group">
 	           		<label for="exampleInputPassword1">Content</label>
 	           		<textarea class="form-control" name="content" rows="3"
 	           			readonly="readonly">${ boardVO.content }
 	           		</textarea>
 	           	</div>
-	           		
+	           	
 	           	<div class="form-group">
 	           		<label for="exampleInputEmail1">Writer</label>
 	           		<input type="text" name="writer" class="form-control"
@@ -92,7 +92,10 @@
 		
 		<!-- 댓글 목록 div -->
 		<ul class="timeline">
-			<li class="time-label" id="repliesDiv"><span class="bg-green">댓글보기</span>
+			<li class="time-label" id="repliesDiv">
+				<span class="bg-green">
+				댓글보기<small id="replycntSmall">[ ${ boardVO.replycnt } ]</small>
+				</span>
 		</ul>
 		
 		<div class="text-center">
@@ -183,10 +186,14 @@
 	var bno = ${boardVO.bno};
 	var replyPage = 1;
 	
+	// 댓글 목록을 보여주는 function
 	function getPage(pageInfo){
 		$.getJSON(pageInfo, function(data){
 			printData(data.list, $("#repliesDiv"), $("#template"));
 			printPaging(data.pageMaker, $(".pagination"));
+			
+			$("#modifyModal").modal('hide');
+			$("#replycntSmall").html("[ " + data.pageMaker.totalCount + " ]");
 		});
 	}
 	

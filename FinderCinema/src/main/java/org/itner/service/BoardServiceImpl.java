@@ -8,6 +8,8 @@ import org.itner.domain.BoardVO;
 import org.itner.domain.Criteria;
 import org.itner.persistence.BoardDAO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 /*
  * BoardService 인터페이스를 구현한 클래스
@@ -24,8 +26,11 @@ public class BoardServiceImpl implements BoardService {
 		dao.create(board);
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public BoardVO read(Integer bno) throws Exception {
+		dao.updateViewCnt(bno);
+		
 		return dao.read(bno);
 	}
 

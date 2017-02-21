@@ -1,0 +1,9 @@
+package org.itner.persistence;
+
+import org.itner.domain.MemberVO;
+import org.itner.dto.LoginDTO;
+
+public interface MemberDAO {
+
+	public MemberVO login(LoginDTO dto) throws Exception;
+}

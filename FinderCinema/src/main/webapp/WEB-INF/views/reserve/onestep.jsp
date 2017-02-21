@@ -90,6 +90,9 @@
 				// 마커를 담을 배열
 				var markers = [];
 				
+				// 장소 담을 문자열 ----------------------------------테스트----------------------------
+				var cinemalist;
+				
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 				    mapOption = {
 				        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
@@ -222,6 +225,9 @@
 				// 검색결과 항목을 Element로 반환하는 함수입니다
 				function getListItem(index, places) {
 					
+					// 장소 추가 ----------------------------------------테스트--------------------
+					cinemalist = cinemalist + places.title;
+					
 				    var el = document.createElement('li'),
 				    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
 				                '<div class="info">' +
@@ -320,14 +326,8 @@
 				}
 				</script>
                 <hr>
-                    
-				<form role="form" action="/reserve/twostep" method="POST">
                 
-                <!--  <input type="hidden" name="data" value="&{placesData};"> -->
-                
-            	<button type="submit" class="btn btn-primary">NEXT</button>
-            	
-            	</form>
+                <button type="button" class="btn btn-info" id="goTwostep">NEXT</button>
             	
             </div>
         </div>
@@ -336,6 +336,34 @@
     <hr>
 
 	<%@include file="../include/footer.jsp" %>
+	
+	<script>
+	
+	// NEXT 버튼 이벤트 등록 ----------------------------------------------테스트--------------------
+	$("#goTwostep").on("click", function(){
+		
+		$.ajax({
+			type: 'post',
+			url: '/twostep',
+			headers: {
+				"Content-Type": "application/json",
+				"X-HTTP-Method-Override": "POST" },
+			data: JSON.stringify(cinemalist),
+			dataType: 'text',
+			success: function(result){
+				console.log("result : " + result);
+				
+				if(result == 'SUCCESS'){
+					alert("수정되었습니다.");
+				}
+				
+				// 아니면 location = { } 을 사용해서
+				// 데이터를 /twostep에 보내놓고 페이지 전환을하고
+				// /twostep에서 getJSON으로 받아와야하나?
+			}});
+	});
+		
+	</script>
 </body>
 
 </html>
