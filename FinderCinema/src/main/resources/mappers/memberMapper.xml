@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 
 <mapper namespace="org.itner.mapper.MemberMapper">
 
-	<select id="login" resultType="UserVO">
+	<select id="login" resultType="MemberVO">
 	SELECT member_id, member_pw, nickname
 	FROM fc_member
 	WHERE member_id = #{member_id} and member_pw = #{member_pw}

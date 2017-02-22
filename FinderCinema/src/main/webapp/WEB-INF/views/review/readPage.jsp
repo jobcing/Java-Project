@@ -57,8 +57,12 @@
            	<!-- /.box-body -->
            	
            	<div class="box-footer">
+           	
+           	<!-- 해당 조회글이 로그인한 사용자가 작성한 것이라면 수정과 삭제버튼이 보이도록 설정 -->
+           	<c:if test="${ login.member_id == boardVO.writer }">
            		<button type="submit" class="btn btn-warning" id="modifyBtn">수정</button>
            		<button type="submit" class="btn btn-danger" id="removeBtn">삭제</button>
+           	</c:if>
            		<button type="submit" class="btn btn-primary" id="listBtn">목록</button>
            	</div>
            	<!-- /.box-footer -->
@@ -72,10 +76,13 @@
 					<div class="box-header">
 						<h3 class="box-title">댓글작성</h3>
 					</div>
+					<!-- 로그인을 한 경우에만 댓글 작성 폼이 보이도록 설정 -->
+					<c:if test="${ not empty login }">
 					<div class="box-body">
-						<label for="newReplyWriter">작성자</label>
-						<input class="form-control" type="text" placeholder="USER ID" id="newReplyWriter">
-						<label for="newReplyText">내용</label>
+						<label for="exampleInputEmail1">작성자</label>
+						<input class="form-control" type="text" placeholder="USER ID" id="newReplyWriter"
+														value="${ login.member_id }" readonly="readonly">
+						<label for="exampleInputEmail1">내용</label>
 						<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
 					</div>
 					<!-- /.box-body -->
@@ -83,6 +90,14 @@
 						<button type="submit" class="btn btn-primary" id="replyAddBtn">댓글등록</button>
 					</div>
 					<!-- /.box-footer -->
+					</c:if>
+					
+					<c:if test="${ empty login }">
+					<div class="box-body">
+						<div><a href="javascript:goLogin();">Login Please</a></div>
+					</div>
+					</c:if>
+					
 				</div>
 				<!-- /.box box-success -->
 			</div>
@@ -152,8 +167,10 @@
 			<h3 class="timeline-header"><strong>{{rno}}</strong> -{{replyer}}</h3>
 			<div class="timeline-body">{{replytext}}</div>
 			<div class="timeline-footer">
+			{{#eqReplyer replyer}}
 				<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modifyModal">
 				수정</a>
+			{{/eqReplyer}}
 			</div>
 		</div>
 	</li>
@@ -179,6 +196,17 @@
 		$(".replyLi").remove();
 		target.after(html);
 	}
+	
+	// Handlebar 기능 확장을 통해 댓글 수정/삭제를 제어
+	Handlebars.registerHelper("eqReplyer", function(replyer, block){
+		var accum = "";
+		
+		if(replyer == "${ login.member_id }"){
+			accum += block.fn();
+		}
+		
+		return accum;
+	});
 	</script>
 	
 	<!-- handlebars 템플릿을 이용하여 댓글 페이지 처리 -->

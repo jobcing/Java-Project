@@ -25,6 +25,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		if(session.getAttribute("login") == null){
 			logger.info("current user is not logined..........");
 			
+			saveURI(request);
+			
 			response.sendRedirect("/user/login");
 			return false;
 		}
@@ -39,7 +41,15 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		String query = request.getQueryString();
 		
 		if(query == null || query.equals("null")){
+			query = "";
+		} else{
+			query = "?" + query;
+		}
+		
+		if(request.getMethod().equals("GET")){
+			logger.info("destination : " + (uri + query));
 			
+			request.getSession().setAttribute("dest", uri + query);
 		}
 	}
 }
