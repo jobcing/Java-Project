@@ -32,30 +32,29 @@
     <!-- Main Content -->
     <div class="container">
     	<div class="row">
-    		<form action="/user/loginPost" method="post">
+    		<form action="/user/join" method="post">
     			<div class="form-group has-feedback">
+					<span style="font-size: 15pt"> <b>아이디 : </b> </span>
     				<input type="text" name="member_id" class="form-control" placeholder="USER ID" />
     				<span class="glphicon glphicon-envelope form-control-feedback"></span>
     			</div>
     			<div class="form-group has-feedback">
+					<span style="font-size: 15pt"> <b>비밀번호 : </b> </span>
     				<input type="password" name="member_pw" class="form-control" placeholder="PASSWORD" />
     				<span class="glphicon glphicon-lock form-control-feedback"></span>
     			</div>
+    			<div class="form-group has-feedback">
+					<span style="font-size: 15pt"> <b>비밀번호 확인 : </b> </span>
+    				<input type="password" name="member_pw" class="form-control" placeholder="PASSWORD" />
+    				<span class="glphicon glphicon-lock form-control-feedback"></span>
+    			</div>
+    			<div class="form-group has-feedback">
+					<span style="font-size: 15pt"> <b>닉네임 : </b> </span>
+    				<input type="text" name="member_id" class="form-control" placeholder="USER ID" />
+    				<span class="glphicon glphicon-envelope form-control-feedback"></span>
+    			</div>
     			<div class="row">
-    				<div class="col-xs-4">
-    					<div class="checkbox icheck">
-    						<label>
-    							<input type="checkbox" name="useCookie"> Remember Me
-    						</label>
-    					</div>
-    				</div> <!-- /.col -->
-    				<div class="col-xs-4">
-    					<button type="button" class="btn btn-warning btn-block btn-flat"
-    						onclick="location.href='/user/join'">Sign Up</button>
-    				</div> <!-- /.col -->
-    				<div class="col-xs-4">
-    					<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-    				</div> <!-- /.col -->
+    				<button type="submit" class="btn btn-primary btn-block btn-flat">Sign Up</button>
     			</div>
     		</form>
     	</div>

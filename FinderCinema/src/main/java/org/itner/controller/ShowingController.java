@@ -21,7 +21,7 @@ public class ShowingController {
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listGET(Model model) {
-		logger.info("now shwoing page get..............");
+		logger.info("now showing page get..............");
 		
 		return "/showing/list";
 	}

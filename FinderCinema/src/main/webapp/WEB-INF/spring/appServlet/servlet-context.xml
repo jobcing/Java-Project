@@ -25,6 +25,8 @@
 	
 	<!-- LoginInterceptor 등록 -->
 	<beans:bean id="loginInterceptor" class="org.itner.interceptor.LoginInterceptor"></beans:bean>
+	<!-- LogoutInterceptor 등록 -->
+	<beans:bean id="logoutInterceptor" class="org.itner.interceptor.LogoutInterceptor"></beans:bean>
 	<!-- Auth Interceptor 등록 -->
 	<beans:bean id="authInterceptor" class="org.itner.interceptor.AuthInterceptor"></beans:bean>
 	
@@ -34,6 +36,11 @@
 		<interceptor>
 			<mapping path="/user/loginPost" />
 			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/user/logout" />
+			<beans:ref bean="logoutInterceptor" />
 		</interceptor>
 		
 		<interceptor>

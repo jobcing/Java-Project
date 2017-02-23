@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.itner.domain.MemberVO;
 import org.itner.dto.LoginDTO;
 import org.itner.service.MemberService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +26,8 @@ public class MemberController {
 
 	@Inject
 	private MemberService service;
+
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void loginGET(@ModelAttribute("dto") LoginDTO dto){
@@ -43,4 +47,14 @@ public class MemberController {
 		model.addAttribute("memberVO", vo);
 	}
 	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public void logoutGET(@ModelAttribute("dto") LoginDTO dto){
+		
+	}
+	
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public void joinGET(@ModelAttribute("vo") MemberVO vo, Model model) throws Exception{
+
+		logger.info("member join page get..............");
+	}
 }
