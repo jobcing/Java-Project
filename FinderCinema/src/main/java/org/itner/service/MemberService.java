@@ -10,4 +10,6 @@ import org.itner.dto.LoginDTO;
 public interface MemberService {
 
 	public MemberVO login(LoginDTO dto) throws Exception;
+	
+	public void join(MemberVO vo) throws Exception;
 }

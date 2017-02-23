@@ -32,30 +32,35 @@
     <!-- Main Content -->
     <div class="container">
     	<div class="row">
-    		<form action="/user/join" method="post">
-    			<div class="form-group has-feedback">
-					<span style="font-size: 15pt"> <b>아이디 : </b> </span>
-    				<input type="text" name="member_id" class="form-control" placeholder="USER ID" />
-    				<span class="glphicon glphicon-envelope form-control-feedback"></span>
-    			</div>
-    			<div class="form-group has-feedback">
-					<span style="font-size: 15pt"> <b>비밀번호 : </b> </span>
-    				<input type="password" name="member_pw" class="form-control" placeholder="PASSWORD" />
-    				<span class="glphicon glphicon-lock form-control-feedback"></span>
-    			</div>
-    			<div class="form-group has-feedback">
-					<span style="font-size: 15pt"> <b>비밀번호 확인 : </b> </span>
-    				<input type="password" name="member_pw" class="form-control" placeholder="PASSWORD" />
-    				<span class="glphicon glphicon-lock form-control-feedback"></span>
-    			</div>
-    			<div class="form-group has-feedback">
-					<span style="font-size: 15pt"> <b>닉네임 : </b> </span>
-    				<input type="text" name="member_id" class="form-control" placeholder="USER ID" />
-    				<span class="glphicon glphicon-envelope form-control-feedback"></span>
-    			</div>
-    			<div class="row">
-    				<button type="submit" class="btn btn-primary btn-block btn-flat">Sign Up</button>
-    			</div>
+    		<form name="minfo" action="/user/join" method="post">
+	    		<div class="box-body">
+	    			<div class="form-group has-feedback">
+						<span style="font-size: 15pt"> <b>아이디 : </b> </span>
+	    				<input type="text" id="id" name="member_id" class="form-control" placeholder="USER ID" />
+	    				<span class="glphicon glphicon-envelope form-control-feedback"></span>
+	    			</div>
+	    			<div class="form-group has-feedback">
+						<span style="font-size: 15pt"> <b>비밀번호 : </b> </span>
+	    				<input type="password" id="pw" name="member_pw" class="form-control" placeholder="PASSWORD" />
+	    				<span class="glphicon glphicon-lock form-control-feedback"></span>
+	    			</div>
+	    			<div class="form-group has-feedback">
+						<span style="font-size: 15pt"> <b>비밀번호 확인 : </b> </span>
+	    				<input type="password" id="confirm" name="member_confirm" class="form-control" placeholder="PASSWORD" />
+	    				<span class="glphicon glphicon-lock form-control-feedback"></span>
+	    			</div>
+	    			<div class="form-group has-feedback">
+						<span style="font-size: 15pt"> <b>닉네임 : </b> </span>
+	    				<input type="text" id="nickname" name="member_id" class="form-control" placeholder="USER ID" />
+	    				<span class="glphicon glphicon-envelope form-control-feedback"></span>
+	    			</div>
+	    		</div>
+	    		<!-- /.box-body -->
+           	
+           		<div class="box-footer">
+    				<button type="button" class="btn btn-primary btn-block btn-flat" onclick="javascript: sendForm()">Sign Up</button>
+           		</div>
+           		<!-- /.box-footer -->
     		</form>
     	</div>
     	<!-- /.row -->
@@ -71,6 +76,93 @@
     <hr>
 
 	<%@include file="../include/footer.jsp" %>
+	
+	<!-- script -->
+	
+	<script>
+	
+	// 아이디 중복 체크
+	$("#id").keyup(function(){
+		$.ajax({
+			type: 'post',
+			url: '/replies/',
+			headers: {
+				"Content-Type": "application/json",
+				"X-HTTP-Method-Override": "POST" },
+			dataType: 'text',
+			data: JSON.stringify({bno: bno, replyer: replyer, replytext: replytext}),
+			success: function(result){
+				console.log("result: " + result);
+				
+				if(result == 'SUCCESS'){
+					alert("등록되었습니다.");
+					replyPage = 1;
+					getPage("/replies/" + bno + "/" + replyPage);
+					replyerObj.val("");
+					replytextObj.val("");
+				}
+			}});
+	});
+	
+	// 회원정보 전송 버튼 이벤트 등록
+	function sendForm(){
+		// 아이디 입력 여부 검사
+		if($("#id").val() == ""){
+			alert("아이디를 입력해주세요.");
+			
+			$("#id").focus();
+			
+			return;
+		}
+		// 아이디 공백 여부 검사
+		if($("#id").val().indexOf(" ") >= 0){
+			alert("아이디에 공백을 사용할 수 없습니다.");
+			
+			$("#id").focus();
+			$("#id").select();
+			
+			return;
+		}
+		// 비밀번호 입력 여부 검사
+		if($("#pw").val() == ""){
+			alert("비밀번호를 입력해주세요.");
+			
+			$("#pw").focus();
+			
+			return;
+		}
+		// 비밀번호 확인과 일치 여부 검사
+		if($("#pw").val() != $("#confirm").val()){
+			alert("비밀번호가 일치하지 않습니다.");
+			
+			$("#pw").val() = "";
+			$("#confirm").val() = "";
+			$("#pw").focus();
+			
+			return;
+		}
+		// 닉네임 입력 여부 검사
+		if($("#nickname").val() == ""){
+			alert("닉네임을 입력해주세요.");
+			
+			$("#nickname").focus();
+			
+			return;
+		}
+		// 닉네임 공백 여부 검사
+		if($("#nickname").val().indexOf(" ") >= 0){
+			alert("닉네임에 공백을 사용할 수 없습니다.");
+			
+			$("#nickname").focus();
+			$("#nickname").select();
+			
+			return;
+		}
+		
+		$("#minfo").submit();
+	}
+	
+	</script>
 	
 </body>
 

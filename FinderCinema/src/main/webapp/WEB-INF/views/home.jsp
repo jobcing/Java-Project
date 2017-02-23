@@ -91,6 +91,19 @@
     <hr>
 
 	<%@include file="include/footer.jsp" %>
+	
+	<!-- script -->
+	
+	<script>
+	var result = '${msg}';
+	
+	// 컨트롤러에서 보낸 msg가 SUCCESS라면 아래와 같은 팝업창을 띄운다.
+	if(result == 'SUCCESS'){
+		alert("처리가 완료되었습니다.");
+	}
+	
+	</script>
+	
 </body>
 
 </html>

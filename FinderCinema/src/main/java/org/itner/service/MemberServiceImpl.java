@@ -18,4 +18,9 @@ public class MemberServiceImpl implements MemberService{
 		return dao.login(dto);
 	}
 
+	@Override
+	public void join(MemberVO vo) throws Exception {
+		dao.insert(vo);
+	}
+
 }

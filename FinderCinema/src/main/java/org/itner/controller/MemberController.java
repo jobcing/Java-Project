@@ -1,8 +1,6 @@
 package org.itner.controller;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.itner.domain.MemberVO;
@@ -15,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Handles requests for the application User.
@@ -54,7 +53,19 @@ public class MemberController {
 	
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public void joinGET(@ModelAttribute("vo") MemberVO vo, Model model) throws Exception{
-
 		logger.info("member join page get..............");
+	}
+	
+	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	public String joinPOST(@ModelAttribute("vo") MemberVO vo, RedirectAttributes rttr) throws Exception{
+		logger.info("member join page post..............");
+		
+		service.join(vo);
+		
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		// 브라우저까지 전송되긴하지만, URI상에는 보이지 않는 데이터로 전송된다.
+		
+		return "redirect:/";
+		// 회원가입에 성공하면 홈페이지로 이동하도록 설정
 	}
 }

@@ -25,4 +25,9 @@ public class MemberDAOImpl implements MemberDAO {
 		return session.selectOne(namespace + ".login", dto);
 	}
 
+	@Override
+	public void insert(MemberVO vo) throws Exception {
+		session.insert(namespace + ".insert", vo);
+	}
+
 }
