@@ -339,11 +339,11 @@
 	<script>
 	
 	// NEXT 버튼 이벤트 등록 ----------------------------------------------테스트--------------------
-	$("#goTwostep").on("click", function(){
+ 	$("#goTwostep").on("click", function(){
 		
 		$.ajax({
 			type: 'post',
-			url: '/twostep',
+			url: '/reserve/twostep',
 			headers: {
 				"Content-Type": "application/json",
 				"X-HTTP-Method-Override": "POST" },
@@ -351,10 +351,6 @@
 			dataType: 'text',
 			success: function(result){
 				console.log("result : " + result);
-				
-				if(result == 'SUCCESS'){
-					alert("수정되었습니다.");
-				}
 				
 				// 아니면 location = { } 을 사용해서
 				// 데이터를 /twostep에 보내놓고 페이지 전환을하고

@@ -37,6 +37,7 @@
 	    			<div class="form-group has-feedback">
 						<span style="font-size: 15pt"> <b>아이디 : </b> </span>
 	    				<input type="text" id="id" name="member_id" class="form-control" placeholder="USER ID" />
+						<label for="exampleInputEmail1" id="check"></label>
 	    				<span class="glphicon glphicon-envelope form-control-feedback"></span>
 	    			</div>
 	    			<div class="form-group has-feedback">
@@ -51,7 +52,7 @@
 	    			</div>
 	    			<div class="form-group has-feedback">
 						<span style="font-size: 15pt"> <b>닉네임 : </b> </span>
-	    				<input type="text" id="nickname" name="member_id" class="form-control" placeholder="USER ID" />
+	    				<input type="text" id="nickname" name="member_id" class="form-control" placeholder="NICKNAME" />
 	    				<span class="glphicon glphicon-envelope form-control-feedback"></span>
 	    			</div>
 	    		</div>
@@ -83,25 +84,30 @@
 	
 	// 아이디 중복 체크
 	$("#id").keyup(function(){
+		var member_id = $("#id").val();
+		var member_pw = $("#pw").val();
+		var nickname = $("#nickname").val();
+		
 		$.ajax({
 			type: 'post',
-			url: '/replies/',
+			url: '/user/check',
 			headers: {
 				"Content-Type": "application/json",
 				"X-HTTP-Method-Override": "POST" },
 			dataType: 'text',
-			data: JSON.stringify({bno: bno, replyer: replyer, replytext: replytext}),
-			success: function(result){
-				console.log("result: " + result);
-				
-				if(result == 'SUCCESS'){
-					alert("등록되었습니다.");
-					replyPage = 1;
-					getPage("/replies/" + bno + "/" + replyPage);
-					replyerObj.val("");
-					replytextObj.val("");
+			data: JSON.stringify({member_id: member_id, member_pw: member_pw, nickname: nickname}),
+			success: function(data){
+				if(data.length > 0){
+					$("#check").html("해당 아이디가 이미 존재합니다.");
+					//alert("해당 아이디가 이미 존재합니다.")
+				} else{
+					$("#check").html("");
 				}
-			}});
+			},
+			error: function(error){
+				alert(error.statusText);
+			}
+			});
 	});
 	
 	// 회원정보 전송 버튼 이벤트 등록

@@ -4,13 +4,17 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.itner.domain.MemberVO;
+import org.itner.domain.ReplyVO;
 import org.itner.dto.LoginDTO;
 import org.itner.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -68,4 +72,21 @@ public class MemberController {
 		return "redirect:/";
 		// 회원가입에 성공하면 홈페이지로 이동하도록 설정
 	}
+	
+	@RequestMapping(value = "/check", method = RequestMethod.POST)
+	public ResponseEntity<MemberVO> checkID(@RequestBody MemberVO vo) {
+
+		ResponseEntity<MemberVO> entity = null;
+		
+		try {
+			MemberVO member = service.checkRepetition(vo);
+			entity = new ResponseEntity<MemberVO>(member, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<MemberVO>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+	}
+	
 }

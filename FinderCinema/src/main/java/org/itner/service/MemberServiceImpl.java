@@ -23,4 +23,9 @@ public class MemberServiceImpl implements MemberService{
 		dao.insert(vo);
 	}
 
+	@Override
+	public MemberVO checkRepetition(MemberVO vo) throws Exception {
+		return dao.selectById(vo);
+	}
+
 }

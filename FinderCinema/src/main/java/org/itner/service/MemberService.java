@@ -12,4 +12,6 @@ public interface MemberService {
 	public MemberVO login(LoginDTO dto) throws Exception;
 	
 	public void join(MemberVO vo) throws Exception;
+	
+	public MemberVO checkRepetition(MemberVO vo) throws Exception;
 }

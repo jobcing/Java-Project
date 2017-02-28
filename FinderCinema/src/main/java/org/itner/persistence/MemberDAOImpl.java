@@ -30,4 +30,9 @@ public class MemberDAOImpl implements MemberDAO {
 		session.insert(namespace + ".insert", vo);
 	}
 
+	@Override
+	public MemberVO selectById(MemberVO vo) throws Exception {
+		return session.selectOne(namespace + ".selectById", vo);
+	}
+
 }
