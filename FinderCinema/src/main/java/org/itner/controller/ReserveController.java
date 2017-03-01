@@ -1,7 +1,17 @@
 package org.itner.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.itner.domain.Criteria;
+import org.itner.domain.MemberVO;
+import org.itner.domain.PageMaker;
+import org.itner.domain.ReplyVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,14 +52,35 @@ public class ReserveController {
 	/*
 	 * 두번째 단계를 보여주는 View를 제공
 	 */
-	@RequestMapping(value = "/twostep", method = RequestMethod.POST)
-	public String twostepPOST(@RequestBody String cinemalist, RedirectAttributes rttr) throws Exception{
-		logger.info("reservation two step page post............");
+	@RequestMapping(value = "/twostep", method = RequestMethod.GET)
+	public String twostepGET(Model model) throws Exception{
+		logger.info("reservation two step page get.............");
 		
-		rttr.addFlashAttribute("data", cinemalist);
-		
-		return "redirect:/reserve/twostep";
-		// view를 리턴하는게아니고 json으로 리턴하는 듯....?
+		return "/reserve/twostep";
 	}
 	
+	@RequestMapping(value = "/twostep", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> twostepPOST(@RequestBody String cinemalist) throws Exception{
+		
+		logger.info("reservation two step page post............");
+		
+		ResponseEntity<Map<String, Object>> entity = null;
+		
+		try {
+			// Ajax로 호출될 것이므로 Model을 사용하지 못한다.
+			// 전달해야 하는 데이터들을 담기 위해서 Map 객체를 활용
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("cinemalist", cinemalist);
+			map.put("url", "/reserve/twostep");
+			
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+	}
+
 }

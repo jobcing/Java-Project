@@ -352,9 +352,7 @@
 			success: function(result){
 				console.log("result : " + result);
 				
-				// 아니면 location = { } 을 사용해서
-				// 데이터를 /twostep에 보내놓고 페이지 전환을하고
-				// /twostep에서 getJSON으로 받아와야하나?
+				location.href="/reserve/twostep";
 			}});
 	});
 		
