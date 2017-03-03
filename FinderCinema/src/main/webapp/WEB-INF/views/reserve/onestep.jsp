@@ -90,7 +90,7 @@
 				var markers = [];
 				
 				// 장소 담을 문자열 ----------------------------------테스트----------------------------
-				var cinemalist;
+				var cinemalist = [];
 				
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 				    mapOption = {
@@ -225,7 +225,7 @@
 				function getListItem(index, places) {
 					
 					// 장소 추가 ----------------------------------------테스트--------------------
-					cinemalist = cinemalist + places.title;
+					cinemalist.push(places.title);
 					
 				    var el = document.createElement('li'),
 				    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +

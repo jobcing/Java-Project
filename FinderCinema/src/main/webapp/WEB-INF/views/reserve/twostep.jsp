@@ -25,12 +25,16 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-  				<h5>${ data }</h5>
+  				<h5>
+  				<c:forEach items="${ list }" var="cinemaData">
+        		<c:out value="${ cinemaData }" />
+        		</c:forEach>
+  				</h5>
                 <hr>
                     
                 <form role="form" method="post">
                 	<input type="hidden" name="data" value="&{placesData};">
-                </form>           
+                </form>
                 
             	<button type="submit" class="btn btn-primary">NEXT</button>
             	
