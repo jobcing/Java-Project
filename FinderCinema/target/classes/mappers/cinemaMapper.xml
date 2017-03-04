@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- CINEMA 관련 SQL -->
+
+<mapper namespace="org.itner.mapper.CinemaMapper">
+
+	<select id="selectByTitle" resultType="CinemaSiteVO">
+	SELECT title, timetable, reserve
+	FROM cinema_site
+	WHERE title = #{title}
+	</select>
+	
+</mapper>

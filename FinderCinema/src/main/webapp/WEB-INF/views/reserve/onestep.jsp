@@ -90,7 +90,7 @@
 				var markers = [];
 				
 				// 장소 담을 문자열 ----------------------------------테스트----------------------------
-				var cinemalist = [];
+				var cinemaList = [];
 				
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 				    mapOption = {
@@ -225,7 +225,7 @@
 				function getListItem(index, places) {
 					
 					// 장소 추가 ----------------------------------------테스트--------------------
-					cinemalist.push(places.title);
+					cinemaList.push(places.title);
 					
 				    var el = document.createElement('li'),
 				    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
@@ -343,11 +343,11 @@
 		
 		$.ajax({
 			type: 'post',
-			url: '/reserve/twostep',
+			url: '/reserve/onestep',
 			headers: {
 				"Content-Type": "application/json",
 				"X-HTTP-Method-Override": "POST" },
-			data: JSON.stringify(cinemalist),
+			data: JSON.stringify(cinemaList),
 			dataType: 'text',
 			success: function(result){
 				console.log("result : " + result);

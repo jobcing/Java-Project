@@ -8,6 +8,6 @@ import org.itner.domain.CinemaSiteVO;
 
 public interface CinemaDAO {
 	
-	public CinemaSiteVO selectByName(String name) throws Exception;
+	public CinemaSiteVO selectByTitle(String title) throws Exception;
 	
 }

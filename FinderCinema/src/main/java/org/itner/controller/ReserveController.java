@@ -1,14 +1,11 @@
 package org.itner.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.itner.domain.Criteria;
-import org.itner.domain.MemberVO;
-import org.itner.domain.PageMaker;
-import org.itner.domain.ReplyVO;
+import javax.inject.Inject;
+
+import org.itner.service.CinemaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,8 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Handles requests for the application reservation page.
@@ -28,8 +23,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/reserve/*")
 public class ReserveController {
 	
+	@Inject
+	private CinemaService service;
+	
 	private static final Logger logger = LoggerFactory.getLogger(ReserveController.class);
-	private List<String> cinemaData = new ArrayList<String>();
+	private List<String> cinemaList = new ArrayList<String>();
 	
 	/**
 	 * Now Showing 메뉴 클릭시 /reserve/list.jsp View를 되돌려주는 컨트롤러
@@ -52,21 +50,12 @@ public class ReserveController {
 	}
 	
 	/*
-	 * 두번째 단계를 보여주는 View를 제공
+	 * ajax를 통해 보낸 JSON데이터를 받고 처리
 	 */
-	@RequestMapping(value = "/twostep", method = RequestMethod.GET)
-	public String twostepGET(Model model) throws Exception{
-		logger.info("reservation two step page get.............");
+	@RequestMapping(value = "/onestep", method = RequestMethod.POST)
+	public ResponseEntity<String> onestepPOST(@RequestBody List<String> cinemaList) throws Exception{
 		
-		model.addAttribute("list", cinemaData);
-		
-		return "/reserve/twostep";
-	}
-	
-	@RequestMapping(value = "/twostep", method = RequestMethod.POST)
-	public ResponseEntity<String> twostepPOST(@RequestBody List<String> cinemalist) throws Exception{
-		
-		logger.info("reservation two step page post............");
+		logger.info("reservation one step page post............");
 		
 		ResponseEntity<String> entity = null;
 		
@@ -86,7 +75,7 @@ public class ReserveController {
 		}
 		*/
 		try {
-			cinemaData = cinemalist;
+			this.cinemaList = cinemaList;
 
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
@@ -95,6 +84,18 @@ public class ReserveController {
 		}
 
 		return entity;
+	}
+	
+	/*
+	 * 두번째 단계를 보여주는 View를 제공 
+	 */
+	@RequestMapping(value = "/twostep", method = RequestMethod.GET)
+	public String twostepGET(Model model) throws Exception{
+		logger.info("reservation two step page get.............");
+		
+		model.addAttribute("list", service.timetableList(cinemaList));
+		
+		return "/reserve/twostep";
 	}
 
 }

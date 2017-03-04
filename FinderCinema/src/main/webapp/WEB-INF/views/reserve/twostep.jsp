@@ -24,34 +24,22 @@
     <!-- Main Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-  				<h5>
-  				<c:forEach items="${ list }" var="cinemaData">
-        		<c:out value="${ cinemaData }" />
+            <table class="table table-bordered">
+        		<!-- 게시글 상단 -->
+        		<tr>
+        			<th style="width: 10px">영화관</th>
+        			<th>영화관 주소</th>
+        		</tr>
+        		<!-- 게시글 목록 -->
+        		<c:forEach items="${ list }" var="CinemaSiteVO">
+        		
+        			<tr>
+        				<td>${ CinemaSiteVO.title }</td>
+        				<td>${ CinemaSiteVO.timetable }</td>
+        			</tr>
+        			
         		</c:forEach>
-  				</h5>
-                <hr>
-                    
-                <form role="form" method="post">
-                	<input type="hidden" name="data" value="&{placesData};">
-                </form>
-                
-            	<button type="submit" class="btn btn-primary">NEXT</button>
-            	
-            	<script>
-            		$(document).ready(function(){
-            			var formObj = $("form[role='form']");
-            			
-            			console.log(formObj);
-            			
-            			$(".btn-primary").on("click", function(){
-            				formObj.attr("action", "/reserve/twostep");
-            				formObj.submit();
-            			});
-            		});
-            	</script>
-
-            </div>
+        	</table>
         </div>
     </div>
 

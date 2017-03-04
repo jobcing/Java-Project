@@ -6,12 +6,12 @@ package org.itner.domain;
  */
 
 public class CinemaSiteVO {
-	private String name;
+	private String title;
 	private String timetable;
 	private String reserve;
 	
-	public void setName(String name){
-		this.name = name;
+	public void setTitle(String title){
+		this.title = title;
 	}
 	
 	public void setTimetable(String timetable){
@@ -22,8 +22,8 @@ public class CinemaSiteVO {
 		this.reserve = reserve;
 	}
 	
-	public String getName(){
-		return this.name;
+	public String getTitle(){
+		return this.title;
 	}
 	
 	public String getTimetable(){
