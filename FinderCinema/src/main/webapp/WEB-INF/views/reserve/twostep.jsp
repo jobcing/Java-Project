@@ -25,8 +25,10 @@
     <div class="container">
         <div class="row">
             <table class="table table-bordered">
+            
+            	<c:out value="${ test }" />
         		<!-- 게시글 상단 -->
-        		<tr>
+        		<%-- <tr>
         			<th style="width: 10px">영화관</th>
         			<th>영화관 주소</th>
         		</tr>
@@ -38,7 +40,7 @@
         				<td>${ CinemaSiteVO.timetable }</td>
         			</tr>
         			
-        		</c:forEach>
+        		</c:forEach> --%>
         	</table>
         </div>
     </div>

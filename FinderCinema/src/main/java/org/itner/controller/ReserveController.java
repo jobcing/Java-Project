@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.itner.domain.CinemaSiteVO;
+import org.itner.domain.TimetableVO;
 import org.itner.service.CinemaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,7 +95,12 @@ public class ReserveController {
 	public String twostepGET(Model model) throws Exception{
 		logger.info("reservation two step page get.............");
 		
-		model.addAttribute("list", service.timetableList(cinemaList));
+		List<CinemaSiteVO> site = service.timetableList(cinemaList); // 테스트
+		String ttvo = service.crawling(site.get(0)); // 테스트
+		
+		// model.addAttribute("list", service.timetableList(cinemaList));
+		
+		model.addAttribute("test", ttvo); // 테스
 		
 		return "/reserve/twostep";
 	}
