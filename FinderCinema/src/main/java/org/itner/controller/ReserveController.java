@@ -96,11 +96,17 @@ public class ReserveController {
 		logger.info("reservation two step page get.............");
 		
 		List<CinemaSiteVO> site = service.timetableList(cinemaList); // 테스트
-		String ttvo = service.crawling(site.get(0)); // 테스트
+		/*
+		List<TimetableVO> timetable = new ArrayList<TimetableVO>();
 		
-		// model.addAttribute("list", service.timetableList(cinemaList));
+		for(int i = 0; i < site.size(); i++){
+			timetable.set(i, service.crawling(site.get(i)));
+		} // 테스트
+		*/
 		
-		model.addAttribute("test", ttvo); // 테스
+		// String ttvo = service.crawling(site.get(0));
+		
+		model.addAttribute("test", ttvo); // 테스트
 		
 		return "/reserve/twostep";
 	}

@@ -4,7 +4,7 @@ public class TimetableVO {
 	
 	private String cinemaTitle;
 	private String[] movie;
-	private MovieTimeVO movietimeVO;
+	private MovieTimeVO[] movietimeVO;
 	
 	public void setCinemaTitle(String cinemaTitle){
 		this.cinemaTitle = cinemaTitle;
@@ -14,7 +14,7 @@ public class TimetableVO {
 		this.movie = movie;
 	}
 	
-	public void setMovieTimeVO(MovieTimeVO movietimeVO){
+	public void setMovieTimeVO(MovieTimeVO[] movietimeVO){
 		this.movietimeVO = movietimeVO;
 	}
 	
@@ -26,7 +26,7 @@ public class TimetableVO {
 		return this.movie;
 	}
 	
-	public MovieTimeVO getMovietimeVO(){
+	public MovieTimeVO[] getMovietimeVO(){
 		return this.movietimeVO;
 	}
 }

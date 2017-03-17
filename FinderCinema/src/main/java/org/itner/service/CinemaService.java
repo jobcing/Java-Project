@@ -11,5 +11,5 @@ public interface CinemaService {
 	
 	public List<CinemaSiteVO> timetableList(List<String> cinemaList) throws Exception;
 	
-	public String crawling(CinemaSiteVO vo) throws ClientProtocolException, IOException; // 테스트
+	public TimetableVO crawling(CinemaSiteVO vo) throws ClientProtocolException, IOException; // 테스트
 }
