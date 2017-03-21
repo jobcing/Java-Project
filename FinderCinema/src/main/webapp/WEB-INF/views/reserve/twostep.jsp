@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -26,21 +27,29 @@
         <div class="row">
             <table class="table table-bordered">
             
-            	<c:out value="${ test }" />
+            	<c:out value="${ test.cinemaTitle }" />
+            	
+            	<c:out value="${fn:length(test.movie)} " />
+            	
         		<!-- 게시글 상단 -->
-        		<%-- <tr>
-        			<th style="width: 10px">영화관</th>
+        		<tr>
         			<th>영화관 주소</th>
         		</tr>
         		<!-- 게시글 목록 -->
-        		<c:forEach items="${ list }" var="CinemaSiteVO">
+        		<!--
+        		<c:forEach items="${ test.movie }" var="movie">
         		
-        			<tr>
-        				<td>${ CinemaSiteVO.title }</td>
-        				<td>${ CinemaSiteVO.timetable }</td>
-        			</tr>
-        			
-        		</c:forEach> --%>
+        		<tr><td>${ movie }</td></tr>
+        		
+        		</c:forEach>
+        		
+        		<c:forEach items="${ test.movietimeVO }" var="times">
+					<c:forEach items="${ times.time }" var="time">
+					<tr><td>${ time }</td></tr>
+					</c:forEach>
+        		</c:forEach>
+        		-->
+        		
         	</table>
         </div>
     </div>

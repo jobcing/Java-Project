@@ -104,9 +104,11 @@ public class ReserveController {
 		} // 테스트
 		*/
 		
-		// String ttvo = service.crawling(site.get(0));
+		TimetableVO timetable = new TimetableVO();
 		
-		model.addAttribute("test", ttvo); // 테스트
+		timetable = service.crawling(site.get(0));
+		
+		model.addAttribute("test", timetable); // 테스트
 		
 		return "/reserve/twostep";
 	}

@@ -73,6 +73,7 @@ public class CinemaServiceImpl implements CinemaService {
 		
 		// 그냥 String[]으로 할지 List<String> 으로 할지 ..?
 		String[] movieTitles = new String[titles.size()];
+		
 		TimetableVO result = new TimetableVO();
 		
 		// 상영 영화 제목 배열에 저장
@@ -86,13 +87,15 @@ public class CinemaServiceImpl implements CinemaService {
 		// 영화 시간은 select를 두번써서 분류되도록 ????
 		Elements times = doc.select("div.col-times");
 		
-		String[] movieTimes = new String[times.size()];
-		
-		for(int i = 0; i < times.size(); i++){
+		for(int i = 0; i < titles.size(); i++){
 			Elements time = times.get(i).select("div.info-timetable li em");
+			String[] movieTimes = new String[time.size()];
+			
 			for(int j = 0; j < time.size(); j++){
 				movieTimes[j] = time.get(j).text();
 			}
+			
+			movietimeVO[i] = new MovieTimeVO();
 			movietimeVO[i].setMovie(movieTitles[i]); // 영화 제목 설정
 			movietimeVO[i].setTime(movieTimes); // 영화에 해당하는 시간표 저장
 		}
