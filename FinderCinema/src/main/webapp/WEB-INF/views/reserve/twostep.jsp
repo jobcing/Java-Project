@@ -25,32 +25,31 @@
     <!-- Main Content -->
     <div class="container">
         <div class="row">
-            <table class="table table-bordered">
-            
-            	<c:out value="${ test.cinemaTitle }" />
-            	
-            	<c:out value="${fn:length(test.movie)} " />
-            	
-        		<!-- 게시글 상단 -->
-        		<tr>
-        			<th>영화관 주소</th>
-        		</tr>
-        		<!-- 게시글 목록 -->
-        		<!--
-        		<c:forEach items="${ test.movie }" var="movie">
-        		
-        		<tr><td>${ movie }</td></tr>
-        		
-        		</c:forEach>
-        		
-        		<c:forEach items="${ test.movietimeVO }" var="times">
-					<c:forEach items="${ times.time }" var="time">
-					<tr><td>${ time }</td></tr>
-					</c:forEach>
-        		</c:forEach>
-        		-->
-        		
-        	</table>
+        	<c:forEach items="${ timetable }" var="timetable">
+	            <table class="table table-bordered">
+	            
+	            	<c:out value="${ timetable.cinemaTitle }" />
+	            	
+	        		<tr>
+	        			<th>상영 영화</th>
+	        			<th>상영 시간</th>
+	        		</tr>
+	        		
+	        		<c:forEach begin="0" end="${ fn:length(timetable.movie) }" step="1" var="i">
+	        		
+	        		<tr>
+	        			<td>${ timetable.movie[i] }</td>
+	        			<td>
+	        			<c:forEach items="${ timetable.movietimeVO[i].time }" var="time">
+	        				<c:out value="${ time }" />
+	        			</c:forEach>
+	        			</td>
+	        		</tr>
+	        		
+	        		</c:forEach>
+	        		
+	        	</table>
+        	</c:forEach>
         </div>
     </div>
 

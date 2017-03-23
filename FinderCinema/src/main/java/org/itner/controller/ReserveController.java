@@ -29,7 +29,7 @@ public class ReserveController {
 	private CinemaService service;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReserveController.class);
-	private List<String> cinemaList = new ArrayList<String>();
+	private List<String> cinemaList = new ArrayList<String>(); // Ajax로 보낸 영화관 데이터를 받을 변수
 	
 	/**
 	 * Now Showing 메뉴 클릭시 /reserve/list.jsp View를 되돌려주는 컨트롤러
@@ -96,19 +96,22 @@ public class ReserveController {
 		logger.info("reservation two step page get.............");
 		
 		List<CinemaSiteVO> site = service.timetableList(cinemaList); // 테스트
-		/*
+		
 		List<TimetableVO> timetable = new ArrayList<TimetableVO>();
 		
-		for(int i = 0; i < site.size(); i++){
-			timetable.set(i, service.crawling(site.get(i)));
-		} // 테스트
-		*/
+		for(int i = 0; i < site.size() - 1; i++){
+			timetable.add(service.crawling(site.get(i)));
+		}
 		
+		model.addAttribute("timetable", timetable);
+		
+		/*
 		TimetableVO timetable = new TimetableVO();
 		
 		timetable = service.crawling(site.get(0));
 		
 		model.addAttribute("test", timetable); // 테스트
+		*/
 		
 		return "/reserve/twostep";
 	}
