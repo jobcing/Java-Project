@@ -45,16 +45,15 @@ public class CinemaServiceImpl implements CinemaService {
 
 	@Override
 	public TimetableVO crawling(CinemaSiteVO vo) throws ClientProtocolException, IOException {
-		// String title = vo.getTitle();
-		/*
+		String title = vo.getTitle();
+		
 		if(vo.getTitle().contains("CGV")){
 			return cgvCrawling(vo);
 		} else if(vo.getTitle().contains("롯데시네마")){
 			return lotteCrawling(vo);
 		}
-		*/
 		
-		return cgvCrawling(vo);
+		return null;
 	}
 	
 	private TimetableVO cgvCrawling(CinemaSiteVO vo) throws ClientProtocolException, IOException{
@@ -156,16 +155,10 @@ public class CinemaServiceImpl implements CinemaService {
 		// 상영 영화 시간표를 저장하기 위한 클래스
 		MovieTimeVO[] movietimeVO = new MovieTimeVO[titles.size()];
 		
-		// 영화 시간은 select를 두번써서 분류되도록 ????
-		Elements times = doc.select("div.col-times");
+		Elements times = doc.select("div.box_story_8 table tbody td");
 		
 		for(int i = 0; i < titles.size(); i++){
-			Elements time = times.get(i).select("div.info-timetable li em");
-			String[] movieTimes = new String[time.size()];
-			
-			for(int j = 0; j < time.size(); j++){
-				movieTimes[j] = time.get(j).text();
-			}
+			String[] movieTimes = times.get(i).text().split("\\s*[|]\\s*");
 			
 			movietimeVO[i] = new MovieTimeVO();
 			movietimeVO[i].setMovie(movieTitles[i]); // 영화 제목 설정

@@ -4,8 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-
-import javax.inject.Inject;
+import java.util.StringTokenizer;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -14,10 +13,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.itner.domain.CinemaSiteVO;
 import org.itner.domain.MovieTimeVO;
-import org.itner.domain.TimetableVO;
-import org.itner.persistence.MemberDAO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -77,30 +73,27 @@ public class lotteCrawlingTest {
 		
 		// 상영 영화 시간표를 저장하기 위한 클래스
 		String[] movietime = new String[titles.size()];
+
+		// 상영 영화 시간표를 저장하기 위한 클래스
+		MovieTimeVO[] movietimeVO = new MovieTimeVO[titles.size()];
 		
 		// 영화 시간은 select를 두번써서 분류되도록 ????
 		Elements times = doc.select("div.box_story_8 table tbody td");
 		
-		for(int i = 0; i < titles.size(); i++){
-			/*
-			String[] movieTimes = new String[time.size()];
-			
-			for(int j = 0; j < time.size(); j++){
-				movieTimes[j] = time.get(j).text();
+		String[] movieTimes = null;
+		
+		for(int i = 0; i < titles.size() - 2; i++){
+			String[] imsi = times.get(i).text().split("[|]");
+			movieTimes = new String[imsi.length];
+			for(int j = 0; j < imsi.length; j++){
+				movieTimes[j] = imsi[j].trim();
 			}
-			
-			movietimeVO[i] = new MovieTimeVO();
-			movietimeVO[i].setMovie(movieTitles[i]); // 영화 제목 설정
-			movietimeVO[i].setTime(movieTimes); // 영화에 해당하는 시간표 저장
-			*/
-			movietime[i] = times.get(i).text();
 		}
 		/*
 		result.setCinemaTitle(vo.getTitle()); // 영화관 이름 저장
 		result.setMovie(movieTitles);
 		result.setMovieTimeVO(movietimeVO);
 		*/
-		return movietime;
+		return movieTimes;
 	}
-
 }
