@@ -21,9 +21,6 @@
                         <a href="/">Home</a>
                     </li>
                     <li>
-                        <a href="/about/">About</a>
-                    </li>
-                    <li>
                         <a href="/showing/list">Now Showing</a>
                     </li>
                     <li>
@@ -32,9 +29,37 @@
                     <li>
                         <a href="/review/listPage">Reviews</a>
                     </li>
+                    <li>
+                        <a>|</a>
+                    </li>
+<%
+					// 세션이 존재하지 않거나 로그인된 사용자가 없다면 메뉴바가 로그인으로 표시
+					if(session == null || session.getAttribute("login") == null){
+%>
+					<li><a href="/user/login">Login</a></li>
+<%	
+					} else{
+%>
+					<li><a href="#" onclick="logoutConfirm()">Logout</a></li>
+<%
+					}
+%>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
+    
+    <%-- 로그아웃 확인 자바스크립트 --%>
+	<script type="text/javascript">
+		function logoutConfirm(){
+			if(confirm("로그아웃하시겠습니까 ?")){
+				location.href = "/user/logout";
+				
+				return true;
+			} else {
+				return false;
+			}
+		} // logoutConfirm()
+	</script>

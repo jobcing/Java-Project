@@ -32,7 +32,7 @@
     <!-- Main Content -->
     <div class="container">
     	<div class="row">
-    		<form name="minfo" action="/user/join" method="post">
+    		<form id="minfo" action="/user/join" method="post">
 	    		<div class="box-body">
 	    			<div class="form-group has-feedback">
 						<span style="font-size: 15pt"> <b>아이디 : </b> </span>
@@ -52,7 +52,7 @@
 	    			</div>
 	    			<div class="form-group has-feedback">
 						<span style="font-size: 15pt"> <b>닉네임 : </b> </span>
-	    				<input type="text" id="nickname" name="member_id" class="form-control" placeholder="NICKNAME" />
+	    				<input type="text" id="nickname" name="nickname" class="form-control" placeholder="NICKNAME" />
 	    				<span class="glphicon glphicon-envelope form-control-feedback"></span>
 	    			</div>
 	    		</div>
@@ -112,6 +112,15 @@
 	
 	// 회원정보 전송 버튼 이벤트 등록
 	function sendForm(){
+		
+		// 아이디 중복체크
+		if($("#check") != ""){
+			alert("아이디가 중복되었습니다.");
+			
+			$("#id").focus();
+			
+			return;
+		}
 		// 아이디 입력 여부 검사
 		if($("#id").val() == ""){
 			alert("아이디를 입력해주세요.");

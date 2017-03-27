@@ -95,7 +95,7 @@ public class ReserveController {
 	public String twostepGET(Model model) throws Exception{
 		logger.info("reservation two step page get.............");
 		
-		List<CinemaSiteVO> site = service.timetableList(cinemaList); // 테스트
+		List<CinemaSiteVO> site = service.timetableList(cinemaList);
 		
 		List<TimetableVO> timetable = new ArrayList<TimetableVO>();
 		
