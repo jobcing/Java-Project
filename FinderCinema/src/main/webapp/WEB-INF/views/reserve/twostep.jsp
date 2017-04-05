@@ -21,9 +21,33 @@
 		<div class="site-heading">
 		</div>
     </header>
-
+    
     <!-- Main Content -->
     <div class="container">
+    	<div class="row">
+    		<!-- 사용자 조건 입력 폼 -->
+    		<form action="/twostep" method="post">
+    		
+				<span style="font-size: 15pt"> 원하는 영화 :  </span>
+				<select name="station" style="width:150px; height:50px; font-size: 13pt">
+					<option value="영화관">영화관</option> 
+				</select>
+				
+				<br/><br/>
+				<span style="font-size: 15pt"> 원하는 시간대 :  </span>
+				<input type="text" name="name" size="20" style="width:200px; height:50px; font-size: 13pt" />
+				<%-- 띄어쓰기 --%>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" value="검색" style="height:50px; width:100px; font-size: 13pt" />
+				
+			</form>
+    	</div>
+    	
+    	<!-- 테스트 -->
+    	<c:forEach items="${ nowshowing }" var="nowshowing">
+    		<c:out value="${ nowshowing }" />
+    	</c:forEach>
+    	
         <div class="row">
         	<c:forEach items="${ timetable }" var="timetable">
 	            <table class="table table-bordered">

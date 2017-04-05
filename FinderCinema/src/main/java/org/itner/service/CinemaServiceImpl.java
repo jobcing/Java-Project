@@ -43,8 +43,11 @@ public class CinemaServiceImpl implements CinemaService {
 		return result;
 	}
 
+	// 영화 시간표 크롤링
 	@Override
-	public TimetableVO crawling(CinemaSiteVO vo) throws ClientProtocolException, IOException {	
+	public TimetableVO timeCrawling(CinemaSiteVO vo) throws ClientProtocolException, IOException {	
+		
+		// 영화관마다 웹크롤링 방식이 다르므로 영화관마다 다른 메소드 사용
 		if(vo.getTitle().contains("CGV")){
 			return cgvCrawling(vo);
 		} else if(vo.getTitle().contains("롯데시네마")){
@@ -54,6 +57,7 @@ public class CinemaServiceImpl implements CinemaService {
 		return null;
 	}
 	
+	// cgv 영화시간표 웹크롤링
 	private TimetableVO cgvCrawling(CinemaSiteVO vo) throws ClientProtocolException, IOException{
 		Document doc = getDoc(vo);
 		
@@ -96,6 +100,7 @@ public class CinemaServiceImpl implements CinemaService {
 		return result;
 	}
 	
+	// 롯데시네마 영화시간표 웹크롤링
 	private TimetableVO lotteCrawling(CinemaSiteVO vo) throws ClientProtocolException, IOException{
 		Document doc = getDoc(vo);
 		
@@ -153,5 +158,43 @@ public class CinemaServiceImpl implements CinemaService {
 		
 		// Jsoup으로 파싱
 		return Jsoup.parse(sb.toString());
+	}
+
+	// 현재 상영작 정보를 가져오는 웹크롤링
+	@Override
+	public String[] showingCrawling() throws ClientProtocolException, IOException {
+		// 가져올 HTTP 주소 셋팅
+		HttpPost http = new HttpPost("http://movie.naver.com/movie/running/current.nhn?view=list&tab=normal&order=reserve");
+		HttpClient httpClient = HttpClientBuilder.create().build(); // 가져오기를 실행할 클라이언트 객체 생성
+		HttpResponse response = httpClient.execute(http); // 실행 및 실행 데이터를 Response 객체에 담음
+		HttpEntity entity = response.getEntity(); // Response 받은 데이터 중, DOM 데이터를 가져와 Entity에 담음
+		
+		ContentType contentType = ContentType.getOrDefault(entity); // Charset을 알아내기 위해 DOM의 컨텐트 타입을 가져와 담고
+		Charset charset = contentType.getCharset(); // Charset을 가져옴
+		
+		// DOM 데이터를 한 줄씩 읽기 위해 Reader에 담음
+		BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent(), charset));
+		StringBuffer sb = new StringBuffer(); // 가져온 DOM 데이터를 담기위한 그릇
+		
+		// DOM 데이터 가져오기
+		String line = "";
+		while((line = br.readLine()) != null){
+			sb.append(line + "\n");
+		}
+		
+		Document doc = Jsoup.parse(sb.toString());
+		
+		// 영화관 목록 Elements로 가져오기
+		Elements titles = doc.select("div.top_poster_area ul.top_thumb_lst li");
+		
+		// 현재 상영작중 예매순으로 높은 10개만 가져온다.
+		String[] movieTitles = new String[10];
+		
+		// 상영 영화 제목 배열에 저장
+		for(int i = 0; i < movieTitles.length; i++){
+			movieTitles[i] = titles.get(i).attr("li");
+		}
+		
+		return movieTitles;
 	}
 }

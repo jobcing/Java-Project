@@ -99,11 +99,16 @@ public class ReserveController {
 		
 		List<TimetableVO> timetable = new ArrayList<TimetableVO>();
 		
+		// 선택된 영화관들의 영화시간표를 크롤링
 		for(int i = 0; i < site.size() - 1; i++){
-			timetable.add(service.crawling(site.get(i)));
+			timetable.add(service.timeCrawling(site.get(i)));
 		}
 		
+		// 현재 상영작 크롤링
+		String[] nowshowing = service.showingCrawling();
+				
 		model.addAttribute("timetable", timetable);
+		model.addAttribute("nowshowing", nowshowing);
 		
 		/*
 		TimetableVO timetable = new TimetableVO();
