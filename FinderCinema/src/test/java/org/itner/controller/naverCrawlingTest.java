@@ -61,13 +61,13 @@ public class naverCrawlingTest {
 		Document doc = Jsoup.parse(sb.toString());
 		
 		// 영화관 목록 Elements로 가져오기
-		Elements titles = doc.select("div.current_open ul.current_list li");
+		Elements titles = doc.select("div.lst_wrap dt.tit a");
 		
 		String[] movieTitles = new String[10];
 		
 		// 상영 영화 제목 배열에 저장
 		for(int i = 0; i < movieTitles.length; i++){
-			movieTitles[i] = titles.get(i).attr("a title");
+			movieTitles[i] = titles.get(i).text();
 		}
 		
 		return movieTitles;

@@ -19,6 +19,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.itner.domain.CinemaSiteVO;
 import org.itner.domain.MovieTimeVO;
 import org.itner.domain.TimetableVO;
+import org.itner.dto.MovieSearchDTO;
 import org.itner.persistence.CinemaDAO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -184,17 +185,25 @@ public class CinemaServiceImpl implements CinemaService {
 		
 		Document doc = Jsoup.parse(sb.toString());
 		
-		// 영화관 목록 Elements로 가져오기
-		Elements titles = doc.select("div.top_poster_area ul.top_thumb_lst li");
+		// 상영 영화 목록 Elements로 가져오기
+		Elements titles = doc.select("div.lst_wrap dt.tit a");
 		
-		// 현재 상영작중 예매순으로 높은 10개만 가져온다.
+		// 크롤링하는 사이트는 예매 순으로 나열되있는 사이트이다.
+		// 위에서부터 10개의 상영 영화 목록만 가져오도록 한다.
 		String[] movieTitles = new String[10];
-		
+				
 		// 상영 영화 제목 배열에 저장
 		for(int i = 0; i < movieTitles.length; i++){
-			movieTitles[i] = titles.get(i).attr("li");
+			movieTitles[i] = titles.get(i).text();
 		}
-		
+				
 		return movieTitles;
+	}
+
+	// 사용자가 원하는 시간표만 보여주기 위한 메소드
+	@Override
+	public TimetableVO search(TimetableVO vo, MovieSearchDTO dto) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

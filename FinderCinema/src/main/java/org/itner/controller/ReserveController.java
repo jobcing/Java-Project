@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.itner.domain.CinemaSiteVO;
 import org.itner.domain.TimetableVO;
+import org.itner.dto.MovieSearchDTO;
 import org.itner.service.CinemaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -121,4 +122,17 @@ public class ReserveController {
 		return "/reserve/twostep";
 	}
 
+	@RequestMapping(value = "/twostep", method = RequestMethod.POST)
+	public String twostepPOST(MovieSearchDTO movieSearch, TimetableVO prevTimetable, Model model)
+			throws Exception{
+		
+		logger.info("reservation two step page post.............");
+		
+		// View로 돌려주는 결과값
+		List<TimetableVO> timetable = new ArrayList<TimetableVO>();
+		
+		service.search(prevTimetable, movieSearch);
+		
+		return null;
+	}
 }
