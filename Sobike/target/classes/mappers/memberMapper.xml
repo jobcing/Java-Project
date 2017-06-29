@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- REVIEWS 게시판 관련 SQL -->
+
+<mapper namespace="org.jpg.mapper.MemberMapper">
+
+	<select id="login" resultType="MemberVO">
+	SELECT classnum, username, regnum
+	FROM user_info
+	WHERE classnum = #{classnum} and regnum = #{regnum}
+	</select>
+	
+	<insert id="insert">
+	INSERT into user_info (classnum, username, regnum)
+	VALUES (#{classnum}, #{username}, #{regname})
+	</insert>
+	
+	<select id="selectById" resultType="MemberVO">
+	SELECT classnum, username, regnum
+	FROM user_info
+	WHERE classnum = #{classnum}
+	</select>
+	
+</mapper>
